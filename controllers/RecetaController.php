@@ -14,7 +14,7 @@ class RecetaController
         } else {
             echo "No tenemos recetas";
         }
-        include_once("./views/recetas/inicio.php");
+        include_once("./views/recetas/admin/inicio.php");
     }
 
 
@@ -44,11 +44,11 @@ class RecetaController
                 }
 
                 Receta::crear($paciente_id, $nombre_archivo_imagen, $nombre, $fecha, $codigo_nacional, $observaciones);
-                header("Location: /farma/recetas");
+                header("Location: /farma/admin/recetas");
                 exit();
             }
         }
-        include_once("./views/recetas/crear.php");
+        include_once("./views/recetas/admin/crear.php");
     }
 
 
@@ -82,7 +82,7 @@ class RecetaController
             
 
             Receta::editar($id_receta, $paciente_id, $imagen_receta, $nombre, $fecha, $estado, $codigo_nacional, $observaciones);
-            header("Location: /farma/recetas");
+            header("Location: /farma/admin/recetas");
             exit();
         }
 
@@ -91,7 +91,7 @@ class RecetaController
             $receta = Receta::buscar($idBuscar);
         }
         // $usuario = Usuario::buscar(1);
-        include_once("./views/recetas/editar.php");
+        include_once("./views/recetas/admin/editar.php");
     }
 
     public function borrar()
@@ -100,7 +100,7 @@ class RecetaController
             $id = $_GET['id'];
             Receta::borrar($id);
         }
-        header("Location: /farma/recetas");
+        header("Location: /farma/admin/recetas");
         exit();
     }
 

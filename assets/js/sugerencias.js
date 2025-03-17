@@ -3,7 +3,7 @@ $(document).ready(function() {
         let term = $(this).val();
         if (term.length > 0) {
             $.ajax({
-                url: '/farma/pacientes/sugerencias',
+                url: '/farma/admin/pacientes/sugerencias',
                 method: 'GET',
                 data: { term: term },
                 success: function(data) {

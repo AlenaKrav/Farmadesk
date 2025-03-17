@@ -23,20 +23,47 @@ class Receta
         $this->observaciones = $observaciones;
     }
 
-
-    public static function crear($paciente_id, $imagen_receta,$nombre,$fecha,$codigo_nacional,$observaciones){
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
-        VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', :codigo_nacional, :observaciones);");
+    //metodo original
+    // public static function crear($paciente_id, $imagen_receta,$nombre,$fecha,$codigo_nacional,$observaciones){
+    //     $conexion = BD::crearInstancia();
+    //     $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
+    //     VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', :codigo_nacional, :observaciones);");
         
-        $sql->bindParam(":paciente_id",$paciente_id);
-        $sql->bindParam(":imagen_receta",$imagen_receta);
-        $sql->bindParam(":nombre",$nombre);
-        $sql->bindParam(":fecha",$fecha);
-        $sql->bindParam(":codigo_nacional",$codigo_nacional);
-        $sql->bindParam(":observaciones",$observaciones);
+    //     $sql->bindParam(":paciente_id",$paciente_id);
+    //     $sql->bindParam(":imagen_receta",$imagen_receta);
+    //     $sql->bindParam(":nombre",$nombre);
+    //     $sql->bindParam(":fecha",$fecha);
+    //     $sql->bindParam(":codigo_nacional",$codigo_nacional);
+    //     $sql->bindParam(":observaciones",$observaciones);
+    //     $sql->execute();
+    // }
+
+    //metodo crear mas flexible depend si le pasan param como CN u observaciones
+    public static function crear($paciente_id, $imagen_receta, $nombre, $fecha, $codigo_nacional = null, $observaciones = null) {
+        $conexion = BD::crearInstancia();
+        
+        // Si el código nacional y observaciones están disponibles (caso admin)
+        if ($codigo_nacional !== null && $observaciones !== null) {
+            $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
+                VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', :codigo_nacional, :observaciones);");
+            $sql->bindParam(":codigo_nacional", $codigo_nacional);
+            $sql->bindParam(":observaciones", $observaciones);
+        } else {
+            // Solo para paciente: el admin completará los campos luego
+            $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
+                VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', NULL, NULL);");
+        }
+    
+        // Bind de los parámetros comunes
+        $sql->bindParam(":paciente_id", $paciente_id);
+        $sql->bindParam(":imagen_receta", $imagen_receta);
+        $sql->bindParam(":nombre", $nombre);
+        $sql->bindParam(":fecha", $fecha);
+    
+        // Ejecutar la consulta
         $sql->execute();
     }
+    
 
     public static function consultar()
     {
@@ -185,5 +212,14 @@ class Receta
         $sql = $conexion->prepare("DELETE FROM tbl_recetas WHERE id_receta = :id_receta");
         $sql->bindParam(":id_receta", $id_receta);
         return $sql->execute();
+    }
+
+    public static function buscarRecetaPaciente($paciente_id){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("SELECT * FROM `tbl_recetas` WHERE paciente_id=:paciente_id");
+        $sql->bindParam(":paciente_id", $paciente_id);
+        $sql->execute();
+        $recetas_paciente = $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $recetas_paciente;
     }
 }

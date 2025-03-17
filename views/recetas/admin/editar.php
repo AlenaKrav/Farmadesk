@@ -57,7 +57,7 @@ echo ($receta->imagen_receta);
                 <input type="text" class="form-control" value="<?php echo $receta->observaciones;?>" name="observaciones" id="observaciones" aria-describedby="helpId" placeholder="Observaciones" />
             </div>
             <button type="submit" name="actualizar" class="btn btn-success">Actualizar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>recetas" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/recetas" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>

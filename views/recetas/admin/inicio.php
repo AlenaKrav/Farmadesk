@@ -4,7 +4,7 @@ print_r($recetas);
 ?>
 <div class="card">
     <div class="card-header">
-        <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>recetas/crear" role="button">Agregar registros</a>
+        <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/recetas/crear" role="button">Agregar registros</a>
     </div>
     <div class="card-body">
         <div
@@ -44,7 +44,8 @@ print_r($recetas);
                     <tr class="">
                         <td><?php echo $registro->id_receta?></td>
                         <td><?php echo $registro->nombre_completo_paciente?></td>
-                        <td><img width="60px" src="assets/img/recetas/<?php echo $registro->imagen_receta;?>"/></td>
+                        
+                        <td><img width="60px" src="<?php echo $url_base; ?>assets/img/recetas/<?php echo $registro->imagen_receta; ?>"/></td>
                         <td><?php echo $registro->nombre?></td>
                         <td><?php echo $registro->fecha?></td>
                         <td><span class="<?php echo $estadoClase; ?>"><?php echo $estado; ?></span></td>
