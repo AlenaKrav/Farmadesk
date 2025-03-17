@@ -10,19 +10,20 @@ class PacienteRecetaController
     {
 
         session_start();
+        print_r($_SESSION);
 
-        if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 3) {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] !== 3) {
             echo "Acceso no autorizado";
             exit;
         }
         
-        $id_paciente=$_SESSION['usuario_id'];
+        $id_paciente=$_SESSION['user_id'];
         $recetas = Receta::buscarRecetaPaciente($id_paciente);
         
         if ($recetas) {
             echo "Tenemos recetas";
         } else {
-            echo "No tenemos recetas";
+            echo "Todavía no tienes ninguna receta";
         }
         include_once("./views/recetas/paciente/inicio.php");
     }

@@ -4,6 +4,7 @@ include_once('./controllers/UsuarioController.php');
 include_once('./controllers/PacienteController.php');
 include_once('./controllers/RecetaController.php');
 include_once('./controllers/LoginController.php');
+include_once('./controllers/PacienteRecetaController.php');
 
 $router = new Router();
 
@@ -122,6 +123,12 @@ $router->post('/login', function() {
 $router->get('/logout', function() {
     $controller = new LoginController();
     $controller->cerrarSesion();
+});
+
+//RUTAS PACIENTE - RECETAS
+$router->get('/paciente/recetas', function() {
+    $controller = new PacienteRecetaController();
+    $controller->inicio();
 });
 
 

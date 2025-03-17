@@ -80,7 +80,7 @@ include_once('../farma/models/Paciente.php');
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Equipo</a></li>
             <li><a href="#contact">Contacto</a></li>
-            <li><a href="#contact">Area Privada</a></li>
+            <li><a href="./login">Area Privada</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
