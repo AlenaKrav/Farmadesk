@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ajusta el directorio base si el proyecto está en una subcarpeta
+    RewriteBase /farma/
+
+    # Redirige todas las peticiones a app.php, excepto archivos y carpetas existentes
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.+)$ app.php [L,QSA]
+</IfModule>
