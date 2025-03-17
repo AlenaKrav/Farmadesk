@@ -1,15 +1,14 @@
 <?php
 $url_base = "http://localhost/farma/";
-// session_start();
-// $url_base = "http://localhost/Project/admin/";
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: " . $url_base . "login.php");
-//     exit();
-// } elseif ($_SESSION['role_id'] !== 1) {
-//     echo "Acceso denegado";
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: " . $url_base . "login");
+    exit();
+} elseif ($_SESSION['role_id'] !== 3) {
+    echo "Acceso denegado";
+    header("Location: " . $url_base . "login");
+    exit();
+}
 ?>
 
 <!doctype html>
@@ -45,7 +44,7 @@ $url_base = "http://localhost/farma/";
         <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active" aria-current="page">Panel de administración<span class="visually-hidden">(current)</span></a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>paciente/recetas">Recetas</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>paciente/recetas">Mis Recetas</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>logout">Cerrar sesión</a>
             </div>
         </nav>

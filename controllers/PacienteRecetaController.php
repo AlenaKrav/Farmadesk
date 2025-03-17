@@ -8,9 +8,8 @@ class PacienteRecetaController
 {
     public function inicio()
     {
-
         session_start();
-        print_r($_SESSION);
+        // print_r($_SESSION);
 
         if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] !== 3) {
             echo "Acceso no autorizado";
@@ -23,7 +22,7 @@ class PacienteRecetaController
         if ($recetas) {
             echo "Tenemos recetas";
         } else {
-            echo "Todavía no tienes ninguna receta";
+            echo "Todavía no tienes ninguna receta registrada";
         }
         include_once("./views/recetas/paciente/inicio.php");
     }

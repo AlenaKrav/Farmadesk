@@ -32,6 +32,7 @@ class LoginController
                             $_SESSION['login'] = true;
                             $_SESSION['user_id'] = $auth->id;
                             $_SESSION['usuario'] = $auth->usuario;
+                            $_SESSION['correo'] = $auth->correo;
                             $_SESSION['role_id'] = $auth->role_id;
                             $_SESSION['id_paciente'] = $auth->id_paciente;
 

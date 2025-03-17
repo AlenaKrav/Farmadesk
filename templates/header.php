@@ -1,15 +1,14 @@
 <?php
 $url_base = "http://localhost/farma/";
-// session_start();
-// $url_base = "http://localhost/Project/admin/";
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: " . $url_base . "login.php");
-//     exit();
-// } elseif ($_SESSION['role_id'] !== 1) {
-//     echo "Acceso denegado";
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header("Location: " . $url_base . "login");
+    exit();
+} elseif ($_SESSION['role_id'] !== 1) {
+    echo "Acceso denegado";
+    header("Location: " . $url_base . "login");
+    exit();
+}
 ?>
 
 <!doctype html>

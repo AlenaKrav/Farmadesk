@@ -1,8 +1,6 @@
 <?php
 class Router {
 
-
-
     public $rutasGET = [];
     public $rutasPOST = [];
 
