@@ -3,6 +3,7 @@ include_once('./Router.php');
 include_once('./controllers/UsuarioController.php');
 include_once('./controllers/PacienteController.php');
 include_once('./controllers/RecetaController.php');
+include_once('./controllers/LoginController.php');
 
 $router = new Router();
 
@@ -107,7 +108,21 @@ $router->get('/admin/recetas/borrar', function() {
     $controller->borrar();
 });
 
+//Rutas de Login y autenticacion
+$router->get('/login', function() {
+    $controller = new LoginController();
+    $controller->login();
+});
 
+$router->post('/login', function() {
+    $controller = new LoginController();
+    $controller->login();
+});
+
+$router->get('/logout', function() {
+    $controller = new LoginController();
+    $controller->cerrarSesion();
+});
 
 
 // Comprobar rutas

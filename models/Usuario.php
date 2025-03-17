@@ -105,7 +105,8 @@ public static function editar($id,$usuario,$password,$correo,$role_id,$id_pacien
     $conexion = BD::crearInstancia();
     $sql=$conexion->prepare("UPDATE tbl_usuarios SET usuario=:usuario, password=:password, correo=:correo, role_id=:role_id, id_paciente=:id_paciente WHERE id=:id");
     $sql->bindParam(":usuario",$usuario);
-    $sql->bindParam(":password",$password);
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $sql->bindParam(":password",$passwordHash);
     $sql->bindParam(":correo",$correo);
     $sql->bindParam(":role_id",$role_id);
     $sql->bindParam(":id_paciente",$id_paciente);

@@ -45,7 +45,7 @@
                                 });
                             </script>
                             
-                            <form action="" method="post">
+                            <form action="" method="post" action='/login'>
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuario</label>
                                     <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="" />
