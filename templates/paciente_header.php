@@ -1,14 +1,17 @@
 <?php
 $url_base = "http://localhost/farma/";
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: " . $url_base . "login");
-    exit();
-} elseif ($_SESSION['role_id'] !== 3) {
-    echo "Acceso denegado";
-    header("Location: " . $url_base . "login");
-    exit();
-}
+// include_once('../../config/config_session.php');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}// print_r($_SESSION);
+// if (!isset($_SESSION['usuario'])) {
+//     header("Location: " . $url_base . "login");
+//     exit();
+// } elseif ($_SESSION['role_id'] !== 3) {
+//     echo "Acceso denegado";
+//     header("Location: " . $url_base . "login");
+//     exit();
+// }
 ?>
 
 <!doctype html>

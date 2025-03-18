@@ -2,6 +2,8 @@
 class Usuario{
 
     public $id;
+    public $nombre;
+    public $apellidos;
     public $usuario;
     public $password;
     public $correo;
@@ -10,10 +12,12 @@ class Usuario{
     public $id_paciente;
 
     //constructor para crea un objeto
-    public function __construct($id,$usuario,$password,$correo,$role_id,$id_paciente)
+    public function __construct($id, $nombre, $apellidos, $usuario,$password,$correo,$role_id,$id_paciente)
     {
         //la asignacion a los atributos de la clase los valores pasados por el constructor
         $this->id=$id;
+        $this->nombre=$nombre;
+        $this->apellidos=$apellidos;
         $this->usuario=$usuario;
         $this->password=$password;
         $this->correo=$correo;
@@ -49,7 +53,7 @@ class Usuario{
     // }
 
 
-    public static function crear ($usuario,$password,$correo,$role_id,$id_paciente){
+    public static function crear ($nombre, $apellidos, $usuario,$password,$correo,$role_id,$id_paciente){
         $conexion = BD::crearInstancia();
         $sentencia = $conexion->prepare("SELECT * FROM tbl_usuarios WHERE usuario=:usuario OR correo=:correo");
         $sentencia->bindParam(":usuario", $usuario);
@@ -61,9 +65,11 @@ class Usuario{
         } else {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             //creamos la query
-            $sentencia = $conexion->prepare("INSERT INTO `tbl_usuarios`(`ID`, `usuario`, `password`, `correo`, `role_id`, `id_paciente`) VALUES (NULL, :usuario, :password, :correo, :role_id, :id_paciente);");
+            $sentencia = $conexion->prepare("INSERT INTO `tbl_usuarios`(`ID`, `nombre`, `apellidos`,`usuario`, `password`, `correo`, `role_id`, `id_paciente`) VALUES (NULL, :nombre, :apellidos, :usuario, :password, :correo, :role_id, :id_paciente);");
 
             //se reemplaza la palabra por el valor de la variable
+            $sentencia->bindParam(":nombre", $nombre);
+            $sentencia->bindParam(":apellidos", $apellidos);
             $sentencia->bindParam(":usuario", $usuario);
             $sentencia->bindParam(":password", $passwordHash);
             $sentencia->bindParam(":correo", $correo);
@@ -79,12 +85,12 @@ class Usuario{
 public static function consultar(){
     $listaUsuarios = [];
     $conexion = BD::crearInstancia();
-    $sql = $conexion->prepare("SELECT u.ID, u.usuario, u.password, u.correo, u.role_id, r.nombre AS role_nombre, u.id_paciente
+    $sql = $conexion->prepare("SELECT u.ID, u.nombre, u.apellidos, u.usuario, u.password, u.correo, u.role_id, r.nombre AS role_nombre, u.id_paciente
                                 FROM tbl_usuarios u
                                 JOIN roles r ON u.role_id = r.id");
     $sql->execute();
     foreach($sql->fetchAll() as $usuario){
-        $nuevoUsuario=new Usuario($usuario['ID'],$usuario['usuario'],$usuario['password'],$usuario['correo'],$usuario['role_id'],$usuario['id_paciente']);
+        $nuevoUsuario=new Usuario($usuario['ID'], $usuario['nombre'], $usuario['apellidos'], $usuario['usuario'],$usuario['password'],$usuario['correo'],$usuario['role_id'],$usuario['id_paciente']);
         $nuevoUsuario->role_nombre = $usuario['role_nombre'];
         $listaUsuarios[] = $nuevoUsuario;
     }
@@ -98,12 +104,14 @@ public static function buscar($id){
     $sql->bindParam(":id",$id);
     $sql->execute();
     $usuario = $sql->fetch();
-    return new Usuario($usuario['ID'],$usuario['usuario'],$usuario['password'],$usuario['correo'],$usuario['role_id'],$usuario['id_paciente']);
+    return new Usuario($usuario['ID'],$usuario['nombre'], $usuario['apellidos'],$usuario['usuario'],$usuario['password'],$usuario['correo'],$usuario['role_id'],$usuario['id_paciente']);
 }
 
-public static function editar($id,$usuario,$password,$correo,$role_id,$id_paciente){
+public static function editar($id,$nombre, $apellidos, $usuario,$password,$correo,$role_id,$id_paciente){
     $conexion = BD::crearInstancia();
-    $sql=$conexion->prepare("UPDATE tbl_usuarios SET usuario=:usuario, password=:password, correo=:correo, role_id=:role_id, id_paciente=:id_paciente WHERE id=:id");
+    $sql=$conexion->prepare("UPDATE tbl_usuarios SET nombre=:nombre, apellidos=:apellidos, usuario=:usuario, password=:password, correo=:correo, role_id=:role_id, id_paciente=:id_paciente WHERE id=:id");
+    $sql->bindParam(":nombre",$nombre);
+    $sql->bindParam(":apellidos",$apellidos);
     $sql->bindParam(":usuario",$usuario);
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
     $sql->bindParam(":password",$passwordHash);

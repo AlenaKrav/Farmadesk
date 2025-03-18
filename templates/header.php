@@ -1,5 +1,6 @@
 <?php
 $url_base = "http://localhost/farma/";
+// include_once('../farma/config/config_session.php');
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: " . $url_base . "login");

@@ -1,11 +1,19 @@
 <?php
 include("./templates/header.php");
-// print_r($_POST);
+print_r($_POST);
 ?>
 <div class="card">
     <div class="card-header">Crear un usuario</div>
     <div class="card-body">
         <form action="" method="post">
+        <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+            </div>
+                    <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos:</label>
+                <input type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos" />
+            </div>
             <div class="mb-3">
                 <label for="usuario" class="form-label">Usuario:</label>
                 <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="Usuario" />
@@ -34,7 +42,7 @@ include("./templates/header.php");
             </div>
    
             <button type="submit" name="agregar" class="btn btn-success">Agregar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>usuarios" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/usuarios" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>

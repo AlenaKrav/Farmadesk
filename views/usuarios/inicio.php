@@ -1,6 +1,6 @@
 <?php
 include("./templates/header.php");
-// print_r($usuarios);
+print_r($usuarios);
 
 ?>
 <div class="card">
@@ -15,6 +15,8 @@ include("./templates/header.php");
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Tipo de usuario</th>
@@ -25,6 +27,8 @@ include("./templates/header.php");
                     <?php foreach($usuarios as $registro) {?>
                     <tr class="">
                         <td><?php echo $registro->id;?></td>
+                        <td><?php echo $registro->nombre;?></td>
+                        <td><?php echo $registro->apellidos;?></td>
                         <td><?php echo $registro->usuario;?></td>
                         <td><?php echo $registro->correo;?></td>
                         <td><?php echo $registro->role_nombre;?></td>

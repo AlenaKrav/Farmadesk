@@ -214,12 +214,33 @@ class Receta
         return $sql->execute();
     }
 
+
+
+
     public static function buscarRecetaPaciente($paciente_id){
+        $listaRecetasPaciente = [];
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("SELECT * FROM `tbl_recetas` WHERE paciente_id=:paciente_id");
         $sql->bindParam(":paciente_id", $paciente_id);
         $sql->execute();
-        $recetas_paciente = $sql->fetchAll(PDO::FETCH_ASSOC);
-        return $recetas_paciente;
+
+        foreach ($sql->fetchAll() as $recetaPaciente) {
+            //por cada fila recorrida, se usa el constructor para crear un objeto con los datos de esa fila
+            //agregamos ese objeto resultante, al arraya
+            $nuevaReceta = new Receta(
+                $recetaPaciente['id_receta'],
+                $recetaPaciente['paciente_id'],
+                $recetaPaciente['imagen_receta'],
+                $recetaPaciente['nombre'],
+                $recetaPaciente['fecha'],
+                $recetaPaciente['estado'],
+                $recetaPaciente['codigo_nacional'],
+                $recetaPaciente['observaciones'],
+            );
+            $listaRecetasPaciente[] = $nuevaReceta;
+        }
+        return $listaRecetasPaciente;
     }
-}
+
+    }
+

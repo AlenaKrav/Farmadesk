@@ -19,7 +19,7 @@ class Router {
         $urlActual = $_SERVER['REQUEST_URI'] ?? '/';
         $urlActual = str_replace('/farma', '', $urlActual);
         $urlActual = explode('?', $urlActual)[0]; // Elimina parámetros GET
-        echo $urlActual;
+        // echo $urlActual;
 
         //proteger las rutas
         // if(in_array($urlActual, $rutas_protegidas) && !$auth){

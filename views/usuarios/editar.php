@@ -12,6 +12,14 @@ var_dump($usuario);
                 <input readonly value="<?php echo $usuario->id ?>" type="text" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="Id" />
             </div>
             <div class="mb-3">
+                <label for="id" class="form-label">Nombre:</label>
+                <input value="<?php echo $usuario->nombre ?>" type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+            </div>
+            <div class="mb-3">
+                <label for="id" class="form-label">Apellidos:</label>
+                <input value="<?php echo $usuario->apellidos ?>" type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos" />
+            </div>
+            <div class="mb-3">
                 <label for="usuario" class="form-label">Usuario:</label>
                 <input value="<?php echo $usuario->usuario ?>" type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="Usuario" />
             </div>

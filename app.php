@@ -131,6 +131,22 @@ $router->get('/paciente/recetas', function() {
     $controller->inicio();
 });
 
+$router->get('/paciente/recetas/crear', function() {
+    $controller = new PacienteRecetaController();
+    $controller->crear();
+});
+
+$router->post('/paciente/recetas/crear', function() {
+    $controller = new PacienteRecetaController();
+    $controller->crear();
+});
+
+$router->get('/paciente/recetas/borrar', function() {
+    $controller = new PacienteRecetaController();
+    $controller->borrar();
+});
+
+
 
 // Comprobar rutas
 $router->comprobarRutas();

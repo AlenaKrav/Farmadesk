@@ -20,7 +20,9 @@ class UsuarioController{
 
     public function crear(){
         if (isset($_POST['agregar'])) {
-            if (isset($_POST['usuario']) && isset($_POST['password']) && isset($_POST['correo'])&& isset($_POST['role_id'])&& isset($_POST['id_paciente'])) {
+            if (isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuario']) && isset($_POST['password']) && isset($_POST['correo'])&& isset($_POST['role_id'])&& isset($_POST['id_paciente'])) {
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
                 $usuario = $_POST['usuario'];
                 $password = $_POST['password'];
                 $correo = $_POST['correo'];
@@ -32,12 +34,13 @@ class UsuarioController{
             else{
                 $id_paciente = NULL;
             }
-            Usuario::crear($usuario,$password,$correo,$role_id,$id_paciente);
-            // header("Location: /farma/usuarios");
-            exit();
+            Usuario::crear($nombre, $apellidos, $usuario,$password,$correo,$role_id,$id_paciente);
+            header("Location: /farma/admin/usuarios");
+                exit();
         }
         
-                if(empty($usuario) || empty($password) || empty($correo) || empty($role_id) ){
+                if(empty($nombre) || empty($apellidos) || empty($usuario) || empty($password) || empty($correo) || empty($role_id) ){
+                    echo "Rellena todos los campos";
                 }
             }
         include_once("./views/usuarios/crear.php");
@@ -46,8 +49,10 @@ class UsuarioController{
 
     public function editar(){
         if(isset($_POST['actualizar'])){
-            if (isset($_POST['id']) && isset($_POST['usuario']) && isset($_POST['password']) && isset($_POST['correo'])&& isset($_POST['role_id']) && isset($_POST['id_paciente'])) {
+            if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['usuario']) && isset($_POST['password']) && isset($_POST['correo'])&& isset($_POST['role_id']) && isset($_POST['id_paciente'])) {
                 $id=$_POST['id'];
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
                 $usuario = $_POST['usuario'];
                 $password = $_POST['password'];
                 $correo = $_POST['correo'];
@@ -60,8 +65,8 @@ class UsuarioController{
                 else{
                     $id_paciente = NULL;
                 }
-                Usuario::editar($id,$usuario,$password,$correo,$role_id,$id_paciente);
-                header("Location: /farma/usuarios");
+                Usuario::editar($id,$nombre, $apellidos,$usuario,$password,$correo,$role_id,$id_paciente);
+                header("Location: /farma/admin/usuarios");
                 exit();
         }
     }
@@ -80,7 +85,7 @@ class UsuarioController{
             $id=$_GET['id'];
             Usuario::borrar($id);
         }
-        header("Location: /farma/usuarios");
+        header("Location: /farma/admin/usuarios");
         exit();
     }
 

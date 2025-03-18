@@ -1,6 +1,8 @@
 <?php
 include_once('./models/Admin.php');
 include_once('./config/conexion.php');
+// include_once('./config/config_session.php');
+
 
 BD::crearInstancia();
 
@@ -31,6 +33,8 @@ class LoginController
                             var_dump($auth->verificarPassword($password));
                             $_SESSION['login'] = true;
                             $_SESSION['user_id'] = $auth->id;
+                            $_SESSION['nombre'] = $auth->nombre;
+                            $_SESSION['apellidos'] = $auth->apellidos;
                             $_SESSION['usuario'] = $auth->usuario;
                             $_SESSION['correo'] = $auth->correo;
                             $_SESSION['role_id'] = $auth->role_id;
@@ -56,10 +60,12 @@ class LoginController
         if($role_id==1){
             echo "Eres admin";
             header("Location: /farma/views/dashboard/admin.php");
+            exit();
 
         }
         elseif ($role_id==3) {
             header("Location: /farma/views/dashboard/paciente.php");
+            exit();
         }
     }
 
