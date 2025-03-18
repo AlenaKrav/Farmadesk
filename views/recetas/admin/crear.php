@@ -1,7 +1,7 @@
 <?php
 include("./templates/header.php");
-print_r($_POST);
-print_r($_FILES);
+// print_r($_POST);
+// print_r($_FILES);
 ?>
 <div class="card">
     <div class="card-header">Dar de alta una receta</div>
@@ -34,7 +34,7 @@ print_r($_FILES);
                 <input type="text" class="form-control" name="observaciones" id="observaciones" aria-describedby="helpId" placeholder="Observaciones" />
             </div>
             <button type="submit" name="agregar" class="btn btn-success">Agregar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>recetas" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/recetas" role="button">Cancelar</a>
         </form>
 
     </div>

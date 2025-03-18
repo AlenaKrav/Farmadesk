@@ -44,7 +44,7 @@ print_r($_POST);
                 <input type="text" value="<?php echo $paciente->cip_aut ?>" class="form-control" name="cip_aut" id="cip_aut" aria-describedby="helpId" placeholder="CIP_AUT" />
             </div>
             <button type="submit" name="actualizar" class="btn btn-success">Actualizar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>pacientes" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/pacientes" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>

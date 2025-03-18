@@ -27,17 +27,17 @@
                 </div>
                 <div class="col-4">
                 <br/><br/>
-                <?php if(isset($mensaje)){ ?>
+                <?php if (!empty($mensajes)) { ?>
+                    <?php foreach ($mensajes as $mensaje) { ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 <strong><?php echo $mensaje; ?></strong>
                             </div>
                             <?php } ?>
+                            <?php } ?>
                     <div class="card">
                         <div class="card-header">Login</div>
                         <div class="card-body">
-                            
-                            
                             <script>
                                 var alertList = document.querySelectorAll(".alert");
                                 alertList.forEach(function (alert) {

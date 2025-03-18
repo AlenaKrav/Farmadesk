@@ -4,7 +4,7 @@ include("./templates/header.php");
 echo ($receta->imagen_receta);
 ?>
 <div class="card">
-    <div class="card-header">Actulizar la receta</div>
+    <div class="card-header">Actualizar la receta</div>
     <div class="card-body">
         <form action="" enctype="multipart/form-data" method="post">
         <div class="mb-3">

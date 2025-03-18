@@ -30,9 +30,13 @@ class PacienteRecetaController
 
     public function crear()
     {
+
+        //iniciamos la sesion
+        session_start();
+
         if (isset($_POST['agregar'])) {
-            if (isset($_POST['id_paciente']) && isset($_FILES['imagen']['name']) && isset($_POST['nombre']) && isset($_POST['fecha'])) {
-                $paciente_id = $_POST['id_paciente'];
+            if (isset($_FILES['imagen']['name']) && isset($_POST['nombre']) && isset($_POST['fecha'])) {
+                $paciente_id = $_SESSION['id_paciente'];
                 $imagen = $_FILES['imagen']['name'];
                 $nombre = $_POST['nombre'];
                 $fecha = $_POST['fecha'];

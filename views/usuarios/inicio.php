@@ -1,11 +1,11 @@
 <?php
 include("./templates/header.php");
-print_r($usuarios);
+// print_r($usuarios);
 
 ?>
 <div class="card">
     <div class="card-header">
-        <a name="" id="" class="btn btn-success" href="usuarios/crear" role="button">Agregar registros</a>
+        <a name="" id="" class="btn btn-success" href="usuarios/crear" role="button">Agregar un nuevo usuario</a>
     </div>
     <div class="card-body">
         <div

@@ -1,6 +1,6 @@
 <?php
 include("./templates/header.php");
-print_r($_POST);
+// print_r($_POST);
 ?>
 <div class="card">
     <div class="card-header">Crear un usuario</div>
@@ -38,7 +38,8 @@ print_r($_POST);
         <!-- Campo de paciente_id (oculto inicialmente) -->
         <div class="mb-3" id="campo_paciente" style="display: none;">
                 <label for="id_paciente" class="form-label">ID Paciente:</label>
-                <input type="text" class="form-control" id="id_paciente" name="id_paciente" aria-describedby="helpId" placeholder="Id de Paciente" />
+                <input type="text" class="form-control" id="paciente_id" name="id_paciente" aria-describedby="helpId" placeholder="Escribe el nombre del paciente" />
+                <div id="sugerencias"></div>
             </div>
    
             <button type="submit" name="agregar" class="btn btn-success">Agregar</button>
@@ -53,7 +54,6 @@ function mostrarCampoPaciente() {
     var rolSeleccionado = document.getElementById('role_id').value;
     console.log(rolSeleccionado);
     var campoPaciente = document.getElementById('campo_paciente');
-    
     if (rolSeleccionado === '3') {
         campoPaciente.style.display = 'block';  // Mostrar campo
     } else {

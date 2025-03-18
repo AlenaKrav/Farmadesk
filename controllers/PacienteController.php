@@ -61,7 +61,7 @@ class PacienteController
                     return "Por favor completa todos los campos.";
                 } else {
                     Paciente::editar($id_paciente, $nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
-                    header("Location: /farma/pacientes");
+                    header("Location: /farma/admin/pacientes");
                     exit();
                 }
             }
@@ -80,7 +80,7 @@ class PacienteController
             $id = $_GET['id'];
             Paciente::borrar($id);
         }
-        header("Location: /farma/pacientes");
+        header("Location: /farma/admin/pacientes");
         exit();
     }
 

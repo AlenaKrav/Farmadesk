@@ -40,7 +40,7 @@ include("./templates/header.php");
                 <input type="text" class="form-control" name="cip_aut" id="cip_aut" aria-describedby="helpId" placeholder="CIP_AUT" />
             </div>
             <button type="submit" name="agregar" class="btn btn-success">Agregar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>pacientes" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/pacientes" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>

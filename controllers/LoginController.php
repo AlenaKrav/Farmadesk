@@ -11,6 +11,8 @@ class LoginController
 
     public function login()
     {
+
+        $mensajes = [];
         session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['entrar'])) {
@@ -22,15 +24,15 @@ class LoginController
                     $auth = Admin::existeUser($usuario);
                     //si no existe
                     if (!$auth) {
-                        echo "No existe este usuario";
+                        $mensajes[] = "Usuario no existe";
                     }
                     //si existe, verificamos su contraseña
                     else {
                         //si
-                        print_r($auth);
-                        echo "User existe";
+                        // print_r($auth);
+                        // echo "User existe";
                         if ($auth->verificarPassword($password)) {
-                            var_dump($auth->verificarPassword($password));
+                            // var_dump($auth->verificarPassword($password));
                             $_SESSION['login'] = true;
                             $_SESSION['user_id'] = $auth->id;
                             $_SESSION['nombre'] = $auth->nombre;
@@ -42,11 +44,11 @@ class LoginController
 
                             $this->redirigirPorRol($auth->role_id);
                         } else {
-                            echo "Contraseña incorrecta";
+                            $mensajes[] = "Contraseña incorrecta";
                         }
                     }
                 }else{
-                    echo "Debes introducir user o password";
+                    $mensajes[] = "Debes introducir user o password";
                 }
 
             }
@@ -58,7 +60,6 @@ class LoginController
 
     private function redirigirPorRol($role_id){
         if($role_id==1){
-            echo "Eres admin";
             header("Location: /farma/views/dashboard/admin.php");
             exit();
 

@@ -13,10 +13,16 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
     <script>
-        let table = new DataTable('table',{
-            "language":{
-                "url":'https://cdn.datatables.net/plug-ins/2.2.2/i18n/es-ES.json',
-            }
+    let table = new DataTable('table', {
+        autoFill: true,
+        "language": {
+            "url": 'https://cdn.datatables.net/plug-ins/2.2.2/i18n/es-ES.json',
+        }
 
-        });       
+
+    });
+
+    table.on('autoFill', function() {
+        table.columns.adjust();
+    });   
     </script>
