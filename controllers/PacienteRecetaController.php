@@ -28,6 +28,8 @@ class PacienteRecetaController
         include_once("./views/recetas/paciente/inicio.php");
     }
 
+
+    //METODO FUNCIONAL Nº1
     public function crear()
     {
 

@@ -8,6 +8,7 @@ class PacienteController
 {
     public function inicio()
     {
+        $mensajes = [];
         //OJO ES UN ARRAY DE OBJETOS
         $pacientes = Paciente::consultar();
         if ($pacientes) {
@@ -36,7 +37,7 @@ class PacienteController
                     return "Error: Por favor completa todos los campos.";
                 }
                 Paciente::crear($nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
-                header("Location: /farma/pacientes");
+                header("Location: /farma/admin/pacientes");
                 exit();
             }
         }

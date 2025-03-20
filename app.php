@@ -5,6 +5,7 @@ include_once('./controllers/PacienteController.php');
 include_once('./controllers/RecetaController.php');
 include_once('./controllers/LoginController.php');
 include_once('./controllers/PacienteRecetaController.php');
+include_once('./controllers/ConsultaFormularioController.php');
 
 $router = new Router();
 
@@ -146,6 +147,27 @@ $router->get('/paciente/recetas/borrar', function() {
     $controller->borrar();
 });
 
+//RUTAS CONSULTAS FORMULARIO
+
+$router->get('/consulta/crear', function() {
+    $controller = new ConsultaFormularioController();
+    $controller->crear();
+});
+
+$router->post('/consulta/crear', function() {
+    $controller = new ConsultaFormularioController();
+    $controller->crear();
+});
+
+$router->get('/admin/consultas-formulario', function() {
+    $controller = new ConsultaFormularioController();
+    $controller->inicio();
+});
+
+$router->get('/admin/consultas-formulario/borrar', function() {
+    $controller = new ConsultaFormularioController();
+    $controller->borrar();
+});
 
 
 // Comprobar rutas

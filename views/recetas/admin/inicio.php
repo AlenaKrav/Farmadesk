@@ -1,6 +1,6 @@
 <?php
 include("./templates/header.php");
-print_r($recetas);
+// print_r($recetas);
 ?>
 <div class="card">
     <div class="card-header">

@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Evitar que la acción por defecto (redirigir) ocurra
         e.preventDefault();
 
+        let currentURL = window.location.href;
+        console.log(currentURL);
+
         // Mostrar la alerta de confirmación usando SweetAlert
         Swal.fire({
             title: '¿Estás seguro?',
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Si el usuario confirma, redirige para borrar
             if (result.isConfirmed) {
                 // Cambiar la URL y redirigir al usuario para borrar el registro
-                window.location.href = 'pacientes/borrar?id=' + id;
+                window.location.href = currentURL + '/borrar?id=' + id;
                 return true;
             } else {
                 return false;

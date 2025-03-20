@@ -1,8 +1,10 @@
 <?php
 
-include_once('../farma/config/conexion.php');
-BD::crearInstancia();
-include_once('../farma/models/Paciente.php');
+// include_once('../farma/config/conexion.php');
+// BD::crearInstancia();
+// include_once('../farma/models/Paciente.php');
+// print_r($_POST)
+
 ?>
 
 
@@ -34,6 +36,9 @@ include_once('../farma/models/Paciente.php');
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Sweet alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- =======================================================
   * Template Name: Green
@@ -694,28 +699,28 @@ include_once('../farma/models/Paciente.php');
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
-
-          <div class="col-lg-7">
+          <?php include_once("../farma/views/secciones/formulario.php");?>
+          <!-- <div class="col-lg-7">
             <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Your Name</label>
+                  <label for="name-field" class="pb-2">Tu nombre</label>
                   <input type="text" name="name" id="name-field" class="form-control" required="">
                 </div>
 
                 <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Your Email</label>
+                  <label for="email-field" class="pb-2">Tu correo electrónico</label>
                   <input type="email" class="form-control" name="email" id="email-field" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                  <label for="subject-field" class="pb-2">Tu teléfono de contacto</label>
+                  <input type="tel" class="form-control" name="subject" id="subject-field" required="">
                 </div>
 
                 <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Message</label>
+                  <label for="message-field" class="pb-2">Tu mensaje</label>
                   <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
                 </div>
 
@@ -729,7 +734,9 @@ include_once('../farma/models/Paciente.php');
 
               </div>
             </form>
-          </div><!-- End Contact Form -->
+          </div>
+          
+          End Contact Form -->
 
         </div>
 
@@ -820,7 +827,20 @@ include_once('../farma/models/Paciente.php');
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <?php
+  if (isset($_GET['mensaje'])) {
+  $mensajeExito = $_GET['mensaje'];
+?>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      Swal.fire({
+          icon: 'success',
+          title: '<?php echo $mensajeExito; ?>'
+      });
+  </script>
+<?php
+}
+?>
 </body>
 
 </html>

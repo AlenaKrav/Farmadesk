@@ -45,6 +45,12 @@ include("./templates/header.php");
     </div>
     <div class="card-footer text-muted"></div>
 </div>
+<script>
+                                var alertList = document.querySelectorAll(".alert");
+                                alertList.forEach(function (alert) {
+                                    new bootstrap.Alert(alert);
+                                });
+                            </script>
 <?php
 include("./templates/footer.php");
 ?>
