@@ -6,6 +6,7 @@ include_once('./controllers/RecetaController.php');
 include_once('./controllers/LoginController.php');
 include_once('./controllers/PacienteRecetaController.php');
 include_once('./controllers/ConsultaFormularioController.php');
+include_once('./controllers/TareaController.php');
 
 $router = new Router();
 
@@ -169,6 +170,37 @@ $router->get('/admin/consultas-formulario/borrar', function() {
     $controller->borrar();
 });
 
+
+//RUTAS TAREAS
+$router->get('/admin/tareas', function() {
+    $controller = new TareaController();
+    $controller->inicio();
+});
+
+$router->get('/admin/tareas/crear', function() {
+    $controller = new TareaController();
+    $controller->crear();
+});
+
+$router->post('/admin/tareas/crear', function() {
+    $controller = new TareaController();
+    $controller->crear();
+});
+
+$router->get('/admin/tareas/editar', function() {
+    $controller = new TareaController();
+    $controller->editar();
+});
+
+$router->post('/admin/tareas/editar', function() {
+    $controller = new TareaController();
+    $controller->editar();
+});
+
+$router->get('/admin/tareas/borrar', function() {
+    $controller = new TareaController();
+    $controller->borrar();
+});
 
 // Comprobar rutas
 $router->comprobarRutas();
