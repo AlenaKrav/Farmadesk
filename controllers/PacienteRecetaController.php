@@ -25,7 +25,7 @@ class PacienteRecetaController
         } else {
             echo "Todavía no tienes ninguna receta registrada";
         }
-        include_once("./views/recetas/paciente/inicio.php");
+        include_once("./views/recetas/paciente/index.php");
     }
 
 

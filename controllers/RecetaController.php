@@ -14,7 +14,7 @@ class RecetaController
         // } else {
         //     echo "No tenemos recetas";
         // }
-        include_once("./views/recetas/admin/inicio.php");
+        include_once("./views/recetas/admin/index.php");
     }
 
     public function crear()

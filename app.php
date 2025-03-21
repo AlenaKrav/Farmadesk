@@ -7,6 +7,7 @@ include_once('./controllers/LoginController.php');
 include_once('./controllers/PacienteRecetaController.php');
 include_once('./controllers/ConsultaFormularioController.php');
 include_once('./controllers/TareaController.php');
+include_once('./controllers/ServicioController.php');
 
 $router = new Router();
 
@@ -200,6 +201,47 @@ $router->post('/admin/tareas/editar', function() {
 $router->get('/admin/tareas/borrar', function() {
     $controller = new TareaController();
     $controller->borrar();
+});
+
+//RUTAS SERVICIOS
+$router->get('/admin/servicios', function() {
+    $controller = new ServicioController();
+    $controller->inicio();
+});
+
+$router->get('/admin/servicios/crear', function() {
+    $controller = new ServicioController();
+    $controller->crear();
+});
+
+$router->post('/admin/servicios/crear', function() {
+    $controller = new ServicioController();
+    $controller->crear();
+});
+
+$router->get('/admin/servicios/editar', function() {
+    $controller = new ServicioController();
+    $controller->editar();
+});
+
+$router->post('/admin/servicios/editar', function() {
+    $controller = new ServicioController();
+    $controller->editar();
+});
+
+$router->get('/admin/servicios/borrar', function() {
+    $controller = new ServicioController();
+    $controller->borrar();
+});
+
+$router->get('/admin/servicios/activar', function() {
+    $controller = new ServicioController();
+    $controller->activar();
+});
+
+$router->get('/admin/servicios/desactivar', function() {
+    $controller = new ServicioController();
+    $controller->desactivar();
 });
 
 // Comprobar rutas

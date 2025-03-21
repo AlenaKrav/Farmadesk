@@ -21,12 +21,11 @@
 
 
     });
-
     table.on('autoFill', function() {
         table.columns.adjust();
     });
 </script>
-<!-- <script src="http://localhost/farma/assets/js/myscript.js" defer></script> -->
+<script src="http://localhost/farma/assets/js/myscript.js" defer></script>
 <!-- Scripts de SweetAlert -->
 <script src="<?php echo $url_base; ?>assets/js/myscript.js"></script>
 <!-- Script con sugerencias -->

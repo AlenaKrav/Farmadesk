@@ -16,7 +16,7 @@ class PacienteController
         } else {
             "Error";
         }
-        include_once("./views/pacientes/inicio.php");
+        include_once("./views/pacientes/index.php");
     }
 
 

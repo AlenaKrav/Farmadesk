@@ -37,9 +37,12 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Estilos propios -->
     <link href="<?php echo $url_base; ?>assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Mi script -->
-    <!-- <script src="js/myscript.js"></script> -->
+    <script src="js/myscript.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Boostrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 </head>
 
 <body>
@@ -54,7 +57,7 @@ if (!isset($_SESSION['usuario'])) {
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/configuraciones/">Configuraciones</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/usuarios">Usuarios</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/tareas">Lista de tareas</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/consultas">Consultas</a>
+                <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/consultas-formulario">Consultas</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/pacientes">Pacientes</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/recetas">Recetas</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>logout">Cerrar sesión</a>

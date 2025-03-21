@@ -15,7 +15,7 @@ class UsuarioController{
         else{
             echo "No tenemos users";
         }
-        include_once("./views/usuarios/inicio.php");
+        include_once("./views/usuarios/index.php");
     }
 
     public function crear(){
