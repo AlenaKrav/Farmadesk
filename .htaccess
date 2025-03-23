@@ -3,6 +3,16 @@
 
     # Ajusta el directorio base si el proyecto está en una subcarpeta
     RewriteBase /farma/
+    #nuevo
+    DirectoryIndex index.php
+
+    # nuevo No redirigir la raíz para que cargue index.php automáticamente
+    # RewriteCond %{REQUEST_URI} !^/farma/$
+    
+    #nuevo
+    # RewriteRule ^$ app.php [L,QSA]
+
+
 
     # Redirige todas las peticiones a app.php, excepto archivos y carpetas existentes
     RewriteCond %{REQUEST_FILENAME} !-f

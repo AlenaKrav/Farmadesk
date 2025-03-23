@@ -1,4 +1,6 @@
 <?php
+$titulo = "Lista de recetas";
+$pagina_activa = "recetas";
 include("./templates/header.php");
 // print_r($recetas);
 ?>

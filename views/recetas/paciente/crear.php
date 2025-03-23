@@ -1,4 +1,6 @@
 <?php
+$titulo = "Crear una nueva receta";
+$pagina_activa = "recetas";
 include("./templates/paciente_header.php");
 // session_start();
 // print_r($_POST);

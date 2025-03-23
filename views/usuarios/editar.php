@@ -1,6 +1,8 @@
 <?php
+$titulo = "Editar un usuario";
+$pagina_activa = "usuarios";
 include("./templates/header.php");
-var_dump($usuario);
+// var_dump($usuario);
 // print_r($_POST);
 ?>
 <div class="card">

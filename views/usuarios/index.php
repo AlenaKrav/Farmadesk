@@ -1,4 +1,6 @@
 <?php
+$titulo = "Lista de usuarios";
+$pagina_activa = "usuarios";
 include("./templates/header.php");
 // print_r($usuarios);
 

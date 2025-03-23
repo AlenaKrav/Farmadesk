@@ -1,6 +1,8 @@
 <?php
+$titulo = "Edición ";
+$pagina_activa = "pacientes";
 include("./templates/header.php");
-print_r($_POST);
+// print_r($_POST);
 ?>
 
 <div class="card">

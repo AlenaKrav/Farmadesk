@@ -20,7 +20,6 @@ class ConsultaFormularioController{
     public function crear(){
         $mensajeExito="";
         $mensaheError="";
-        echo "Se ha creado una consulta";
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
             // print_r($_POST);

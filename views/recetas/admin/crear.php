@@ -1,4 +1,6 @@
 <?php
+$titulo = "Crear recetas";
+$pagina_activa = "recetas";
 include("./templates/header.php");
 // print_r($_POST);
 // print_r($_FILES);

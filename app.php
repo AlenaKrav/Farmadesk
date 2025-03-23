@@ -8,8 +8,17 @@ include_once('./controllers/PacienteRecetaController.php');
 include_once('./controllers/ConsultaFormularioController.php');
 include_once('./controllers/TareaController.php');
 include_once('./controllers/ServicioController.php');
+include_once('./controllers/IndexController.php');
+
+$serviciosActivos="";
 
 $router = new Router();
+
+$router->get('/', function() use (&$serviciosActivos) {
+    $controller = new IndexController();
+    $serviciosActivos = $controller->mostrarActivos();
+});
+
 
 // Definir rutas USUARIOS
 //  /admin/usuarios
@@ -243,6 +252,7 @@ $router->get('/admin/servicios/desactivar', function() {
     $controller = new ServicioController();
     $controller->desactivar();
 });
+
 
 // Comprobar rutas
 $router->comprobarRutas();

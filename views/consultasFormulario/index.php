@@ -1,4 +1,6 @@
 <?php
+$titulo = "Lista de consultas";
+$pagina_activa = "consultas";
 include("./templates/header.php");
 ?>
 

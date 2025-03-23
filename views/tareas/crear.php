@@ -1,4 +1,6 @@
 <?php
+$titulo = "Crear tareas";
+$pagina_activa = "tareas";
 include("./templates/header.php");
 ?>
 <div class="card">

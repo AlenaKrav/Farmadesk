@@ -13,18 +13,14 @@ class Router {
     }
 
     public function comprobarRutas() {
-        // session_start();
-        // $auth = $_SESSION['login'] ?? null;
-        $rutas_protegidas=['/admin'];
         $urlActual = $_SERVER['REQUEST_URI'] ?? '/';
         $urlActual = str_replace('/farma', '', $urlActual);
-        $urlActual = explode('?', $urlActual)[0]; // Elimina parámetros GET
-        // echo $urlActual;
-
-        //proteger las rutas
-        // if(in_array($urlActual, $rutas_protegidas) && !$auth){
-        //     header('Location: /farma');
-        // }
+        $urlActual = explode('?', $urlActual)[0];
+            if ($urlActual === '' || $urlActual === '/') {
+        $urlActual = '/';
+    }
+        // Elimina parámetros GET
+        // echo "Hola tu ruta actual: " . $urlActual;
 
         $metodo = $_SERVER['REQUEST_METHOD'];
         // echo $metodo;

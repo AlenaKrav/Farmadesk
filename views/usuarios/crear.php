@@ -1,4 +1,6 @@
 <?php
+$titulo = "Crear un usuario";
+$pagina_activa = "usuarios";
 include("./templates/header.php");
 // print_r($_POST);
 ?>

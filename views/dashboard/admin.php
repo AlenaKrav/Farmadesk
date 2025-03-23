@@ -1,4 +1,6 @@
 <?php
+$titulo = "Panel de administración";
+$pagina_activa = "admin";
 include("../../templates/header.php");
 print_r($_SESSION);
 echo "Dashboard admin";

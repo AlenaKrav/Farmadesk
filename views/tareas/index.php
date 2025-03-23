@@ -1,4 +1,6 @@
 <?php
+$titulo = "Lista de tareas";
+$pagina_activa = "tareas";
 include("./templates/header.php");
 // print_r($tareas);
 ?>

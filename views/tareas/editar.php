@@ -1,4 +1,6 @@
 <?php
+$titulo = "Editar tareas";
+$pagina_activa = "tareas";
 include("./templates/header.php");
 print_r($_SESSION);
 print_r($tarea->estado);

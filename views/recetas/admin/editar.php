@@ -1,7 +1,9 @@
 <?php
+$titulo = "Editar recetas";
+$pagina_activa = "recetas";
 include("./templates/header.php");
 // var_dump($_FILES['imagen_receta']);
-echo ($receta->imagen_receta);
+// echo ($receta->imagen_receta);
 ?>
 <div class="card">
     <div class="card-header">Actualizar la receta</div>

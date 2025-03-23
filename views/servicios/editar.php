@@ -1,4 +1,6 @@
 <?php
+$titulo = "Editar servicios";
+$pagina_activa = "servicios";
 include("./templates/header.php");
 // print_r($servicio);
 ?>

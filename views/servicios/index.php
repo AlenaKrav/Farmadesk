@@ -1,5 +1,6 @@
 <?php
-echo "Panel inicio serivicios";
+$titulo = "Lista de servicios";
+$pagina_activa = "servicios";
 include("./templates/header.php");
 // var_dump($servicio);
 ?>
@@ -27,7 +28,7 @@ include("./templates/header.php");
                     <?php foreach ($servicio as $registro) { ?>
                         <tr class="">
                             <td><?php echo $registro->id; ?></td>
-                            <td><?php echo $registro->icono; ?></td>
+                            <td><i class="<?php echo $registro->icono; ?> fs-1"></i></td>
                             <td><?php echo $registro->titulo; ?></td>
                             <td><?php echo $registro->descripcion; ?></td>
                             <td>

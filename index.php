@@ -1,10 +1,9 @@
 <?php
-
-// include_once('../farma/config/conexion.php');
-// BD::crearInstancia();
-// include_once('../farma/models/Paciente.php');
-// print_r($_POST)
-
+include_once("./app.php");
+// $urlActual = $_SERVER['REQUEST_URI'];
+// $urlActual = str_replace('/farma', '', $urlActual);
+// $urlActual = explode('?', $urlActual)[0];
+// print_r($urlActual);
 ?>
 
 
@@ -108,7 +107,7 @@
           <div class="carousel-container">
             <h2>Welcome to Green</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <a href="#featured-services" class="btn-get-started">Get Started</a>
+            <!-- <a href="#featured-services" class="btn-get-started">Get Started</a> -->
           </div>
         </div><!-- End Carousel Item -->
 
@@ -117,7 +116,7 @@
           <div class="carousel-container">
             <h2>At vero eos et accusamus</h2>
             <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut.</p>
-            <a href="#featured-services" class="btn-get-started">Get Started</a>
+            <!-- <a href="#featured-services" class="btn-get-started">Get Started</a> -->
           </div>
         </div><!-- End Carousel Item -->
 
@@ -126,7 +125,7 @@
           <div class="carousel-container">
             <h2>Temporibus autem quibusdam</h2>
             <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt omnis iste natus error sit voluptatem accusantium.</p>
-            <a href="#featured-services" class="btn-get-started">Get Started</a>
+            <!-- <a href="#featured-services" class="btn-get-started">Get Started</a> -->
           </div>
         </div><!-- End Carousel Item -->
 
@@ -346,14 +345,20 @@
     <!-- /Clients Section -->
 
     <!-- Services Section -->
-    <?php include_once("../farma/views/secciones/servicios.php");?>
+    <?php
+// require_once('../farma/controllers/ServicioController.php');
+// $controller = new ServicioController();
+// $serviciosActivos = $controller->mostrarActivos();
 
-    <section id="services" class="services section">
-      <!-- Section Title -->
+echo $serviciosActivos;
+
+?>
+
+    <!-- <section id="services" class="services section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Services</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -365,7 +370,7 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Nesciunt Mete</a></h3>
               <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item item-orange position-relative">
@@ -373,7 +378,7 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Eosle Commodi</a></h3>
               <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item item-teal position-relative">
@@ -381,7 +386,7 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Ledo Markt</a></h3>
               <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item item-red position-relative">
@@ -389,7 +394,7 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Asperiores Commodi</a></h3>
               <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
             <div class="service-item item-indigo position-relative">
@@ -397,7 +402,7 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Velit Doloremque.</a></h3>
               <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
             <div class="service-item item-pink position-relative">
@@ -405,13 +410,15 @@
               <h3><a href="service-details.html" class="read-more stretched-link">Dolori Architecto</a></h3>
               <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
             </div>
-          </div><!-- End Service Item -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Services Section -->
+    </section> -->
+    
+    <!-- /Services Section -->
 
     <!-- Call To Action Section -->
     <!-- <section id="call-to-action" class="call-to-action section accent-background">

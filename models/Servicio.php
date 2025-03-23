@@ -49,11 +49,15 @@ class Servicio
     //FUNCION PARA MOSTRAR LOS SERVICIOS EN LA HOME
     public static function mostrarActivos()
     {
+        $serviciosActivos = [];
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("SELECT * FROM tbl_servicios WHERE activo=1");
         $sql->execute();
-        $servicioActivo = $sql->fetch();
-        return new Servicio($servicioActivo['id'], $servicioActivo['icono'], $servicioActivo['titulo'], $servicioActivo['descripcion'], $servicioActivo['activo']);
+        foreach ($sql->fetchAll() as $servicioActivo) {
+            $servicioActivo = new Servicio($servicioActivo['id'], $servicioActivo['icono'], $servicioActivo['titulo'], $servicioActivo['descripcion'], $servicioActivo['activo']);
+            $serviciosActivos[] = $servicioActivo;
+        }
+        return $serviciosActivos;
     }
 
     public static function consultar()

@@ -1,5 +1,6 @@
 <?php
-echo "Panel crear servicios";
+$titulo = "Crear servicios";
+$pagina_activa = "servicios";
 include("./templates/header.php");
 ?>
 <div class="card">
