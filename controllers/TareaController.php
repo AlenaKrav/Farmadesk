@@ -11,11 +11,11 @@ class TareaController
         //OJO ES UN ARRAY DE OBJETOS
         $tareas = Tarea::consultar();
         
-        if ($tareas) {
-            echo "Tenemos tareas";
-        } else {
-            echo "No tenemos users";
-        }
+        // if ($tareas) {
+        //     echo "Tenemos tareas";
+        // } else {
+        //     echo "No tenemos users";
+        // }
         include_once("./views/tareas/index.php");
     }
 

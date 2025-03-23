@@ -1,4 +1,6 @@
 <?php
+$titulo = "Dar de alta un paciente";
+$pagina_activa = "pacientes";
 include("./templates/header.php");
 // print_r($_POST);
 ?>

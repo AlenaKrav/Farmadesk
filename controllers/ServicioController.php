@@ -10,18 +10,18 @@ class ServicioController{
         //OJO ES UN ARRAY DE OBJETOS
         $servicio = Servicio::consultar();
         
-        if ($servicio) {
-            echo "Tenemos servicios";
-        } else {
-            echo "No tenemos servicios";
-        }
+        // if ($servicio) {
+        //     echo "Tenemos servicios";
+        // } else {
+        //     echo "No tenemos servicios";
+        // }
         include_once("./views/servicios/index.php");
     }
 
-    public function mostrarActivos(){
-        $serviciosActivos = Servicio::mostrarActivos();
-        include_once("./views/secciones/servicios.php");
-    }
+    // public function mostrarActivos(){
+    //     $serviciosActivos = Servicio::mostrarActivos();
+    //     include_once("./views/secciones/servicios.php");
+    // }
 
     public function crear(){
         if (isset($_POST['agregar'])) {

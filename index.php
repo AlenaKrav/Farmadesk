@@ -1,9 +1,5 @@
 <?php
 include_once("./app.php");
-// $urlActual = $_SERVER['REQUEST_URI'];
-// $urlActual = str_replace('/farma', '', $urlActual);
-// $urlActual = explode('?', $urlActual)[0];
-// print_r($urlActual);
 ?>
 
 
@@ -73,7 +69,7 @@ include_once("./app.php");
         <a href="index.php" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <img src="assets/img/logo.png" alt="">
-          <h1 class="sitename">Green</h1>
+          <h1 class="sitename">Farmadesk</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
@@ -81,7 +77,7 @@ include_once("./app.php");
             <li><a href="/farma/index.php" class="active">Inicio</a></li>
             <li><a href="#about">Sobre nosotros</a></li>
             <li><a href="#services">Servicios</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#portfolio">Nuestros productos</a></li>
             <li><a href="#team">Equipo</a></li>
             <li><a href="#contact">Contacto</a></li>
             <li><a href="./login">Area Privada</a></li>
@@ -105,7 +101,7 @@ include_once("./app.php");
         <div class="carousel-item active">
           <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
           <div class="carousel-container">
-            <h2>Welcome to Green</h2>
+            <h2>Bienvenido a Farmadesk</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <!-- <a href="#featured-services" class="btn-get-started">Get Started</a> -->
           </div>
@@ -143,62 +139,12 @@ include_once("./app.php");
 
     </section><!-- /Hero Section -->
 
-    <!-- Featured Services Section -->
-    <!-- <section id="featured-services" class="featured-services section light-background">
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-activity icon"></i></div>
-              <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-            </div>
-          </div> -->
-          <!-- End Service Item -->
-<!-- 
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
-              <h4><a href="" class="stretched-link">Sed ut perspici</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-            </div>
-          </div> -->
-          <!-- End Service Item -->
-<!-- 
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
-              <h4><a href="" class="stretched-link">Magni Dolores</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-            </div>
-          </div> -->
-          <!-- End Service Item -->
-
-          <!-- <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-broadcast icon"></i></div>
-              <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-            </div>
-          </div> -->
-          <!-- End Service Item -->
-<!-- 
-        </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Featured Services Section -->
-
     <!-- About Section -->
     <section id="about" class="about section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>About Us</h2>
+        <h2>Sobre nosotros</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -207,7 +153,6 @@ include_once("./app.php");
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
             <img src="assets/img/about.jpg" class="img-fluid" alt="">
-            <!-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a> -->
           </div>
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
             <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -229,122 +174,7 @@ include_once("./app.php");
 
       </div>
 
-    </section><!-- /About Section -->
-
-    <!-- Why Us Section -->
-    <!-- <section id="why-us" class="why-us section">
-
-      <div class="container">
-
-        <div class="row no-gutters">
-
-          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="100">
-            <span>01</span>
-            <h4>Lorem Ipsum</h4>
-            <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-          </div> -->
-          <!-- End Card Item -->
-<!-- 
-          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="200">
-            <span>02</span>
-            <h4>Repellat Nihil</h4>
-            <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-          </div> -->
-          <!-- End Card Item -->
-
-          <!-- <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="300">
-            <span>03</span>
-            <h4> Ad ad velit qui</h4>
-            <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-          </div> -->
-          <!-- End Card Item -->
-<!-- 
-          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="400">
-            <span>04</span>
-            <h4>Repellendus molestiae</h4>
-            <p>Inventore quo sint a sint rerum. Distinctio blanditiis deserunt quod soluta quod nam mider lando casa</p>
-          </div> -->
-          <!-- End Card Item -->
-
-          <!-- <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="400">
-            <span>05</span>
-            <h4>Sapiente Magnam</h4>
-            <p>Vitae dolorem in deleniti ipsum omnis tempore voluptatem. Qui possimus est repellendus est quibusdam</p>
-          </div> -->
-          <!-- End Card Item -->
-<!-- 
-          <div class="col-lg-4 col-md-6 card" data-aos="fade-up" data-aos-delay="600">
-            <span>06</span>
-            <h4>Facilis Impedit</h4>
-            <p>Quis eum numquam veniam ea voluptatibus voluptas. Excepturi aut nostrum repudiandae voluptatibus corporis sequi</p>
-          </div> -->
-          <!-- End Card Item -->
-
-        <!-- </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Why Us Section -->
-
-    <!-- Clients Section -->
-    <!-- <section id="clients" class="clients section light-background">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config"> -->
-            <!-- {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 40
-                },
-                "480": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 60
-                },
-                "640": {
-                  "slidesPerView": 4,
-                  "spaceBetween": 80
-                },
-                "992": {
-                  "slidesPerView": 6,
-                  "spaceBetween": 120
-                }
-              }
-            }
-          </script> -->
-          <!-- <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div> -->
-          <!-- </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Clients Section -->
-
-    <!-- Services Section -->
+    </section>
     <?php
 // require_once('../farma/controllers/ServicioController.php');
 // $controller = new ServicioController();
@@ -354,114 +184,21 @@ echo $serviciosActivos;
 
 ?>
 
-    <!-- <section id="services" class="services section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div>
-
-      <div class="container">
-
-        <div class="row g-5">
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item item-cyan position-relative">
-              <i class="bi bi-activity icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Nesciunt Mete</a></h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item item-orange position-relative">
-              <i class="bi bi-broadcast icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Eosle Commodi</a></h3>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item item-teal position-relative">
-              <i class="bi bi-easel icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Ledo Markt</a></h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item item-red position-relative">
-              <i class="bi bi-bounding-box-circles icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Asperiores Commodi</a></h3>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item item-indigo position-relative">
-              <i class="bi bi-calendar4-week icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Velit Doloremque.</a></h3>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item item-pink position-relative">
-              <i class="bi bi-chat-square-text icon"></i>
-              <h3><a href="service-details.html" class="read-more stretched-link">Dolori Architecto</a></h3>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section> -->
-    
-    <!-- /Services Section -->
-
-    <!-- Call To Action Section -->
-    <!-- <section id="call-to-action" class="call-to-action section accent-background">
-
-      <div class="container">
-
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-          <div class="col-xl-9 text-center text-xl-start">
-            <h3>Call To Action</h3>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div class="col-xl-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">Call To Action</a>
-          </div>
-        </div>
-
-      </div>
-
-    </section> -->
-    <!-- /Call To Action Section -->
-
+<?php
+echo $productosDisponibles;
+?>
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
-
-      <!-- Section Title -->
+    <!-- <section id="portfolio" class="portfolio section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Portfolio</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div>
-      <!-- End Section Title -->
+      
 
       <div class="container">
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-          <!-- <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul> -->
-          <!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
@@ -473,7 +210,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -483,7 +220,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -493,7 +230,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -503,7 +240,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
@@ -513,7 +250,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -523,7 +260,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -533,7 +270,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -543,7 +280,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <div class="portfolio-content h-100">
@@ -553,7 +290,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <div class="portfolio-content h-100">
@@ -563,7 +300,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <div class="portfolio-content h-100">
@@ -573,7 +310,7 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
               <div class="portfolio-content h-100">
@@ -583,24 +320,29 @@ echo $serviciosActivos;
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>
 
-          </div><!-- End Portfolio Container -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Portfolio Section -->
+    </section> -->
+    <!-- /Portfolio Section -->
+  
+    
+    <?php
+    echo $miembrosEquipo;
+    ?>
 
     <!-- Team Section -->
-    <section id="team" class="team section light-background">
+    <!-- <section id="team" class="team section light-background">
 
-      <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Team</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+      </div>
 
       <div class="container">
 
@@ -623,7 +365,7 @@ echo $serviciosActivos;
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
           <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
@@ -642,7 +384,7 @@ echo $serviciosActivos;
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
           <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
@@ -661,13 +403,13 @@ echo $serviciosActivos;
                 </div>
               </div>
             </div>
-          </div><!-- End Team Member -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Team Section -->
+    </section> -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
@@ -713,49 +455,11 @@ echo $serviciosActivos;
             </div>
           </div>
           <?php include_once("../farma/views/secciones/formulario.php");?>
-          <!-- <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Tu nombre</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required="">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Tu correo electrónico</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Tu teléfono de contacto</label>
-                  <input type="tel" class="form-control" name="subject" id="subject-field" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Tu mensaje</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div>
-          
-          End Contact Form -->
-
         </div>
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </section>
 
   </main>
 
@@ -839,6 +543,9 @@ echo $serviciosActivos;
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Validar el formulario -->
+  <script src="assets/js/validar.js"></script>
+
   <?php
   if (isset($_GET['mensaje'])) {
   $mensajeExito = $_GET['mensaje'];

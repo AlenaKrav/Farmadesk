@@ -9,11 +9,11 @@ class ConsultaFormularioController{
     {
         //OJO ES UN ARRAY DE OBJETOS
         $consultas = ConsultaFormulario::consultar();
-        if ($consultas) {
-            echo "Tenemos consultas";
-        } else {
-            "Error";
-        }
+        // if ($consultas) {
+        //     echo "Tenemos consultas";
+        // } else {
+        //     "Error";
+        // }
         include_once("./views/consultasFormulario/index.php");
     }
 

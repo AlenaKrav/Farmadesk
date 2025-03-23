@@ -9,12 +9,12 @@ class UsuarioController{
     public function inicio(){
         //OJO ES UN ARRAY DE OBJETOS
         $usuarios= Usuario::consultar();
-        if($usuarios){
-            echo "Tenemos users";
-        }
-        else{
-            echo "No tenemos users";
-        }
+        // if($usuarios){
+        //     echo "Tenemos users";
+        // }
+        // else{
+        //     echo "No tenemos users";
+        // }
         include_once("./views/usuarios/index.php");
     }
 

@@ -1,5 +1,5 @@
 <?php
-$titulo = "Lista de pacientes";
+$titulo = "Listado de pacientes";
 $pagina_activa = "pacientes";
 include("./templates/header.php");
 // var_dump($pacientes);

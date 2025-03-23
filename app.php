@@ -9,14 +9,21 @@ include_once('./controllers/ConsultaFormularioController.php');
 include_once('./controllers/TareaController.php');
 include_once('./controllers/ServicioController.php');
 include_once('./controllers/IndexController.php');
+include_once('./controllers/EquipoController.php');
+include_once('./controllers/ProductoController.php');
+
 
 $serviciosActivos="";
+$miembrosEquipo="";
+$productosDisponibles="";
 
 $router = new Router();
 
-$router->get('/', function() use (&$serviciosActivos) {
-    $controller = new IndexController();
-    $serviciosActivos = $controller->mostrarActivos();
+$router->get('/', function() use (&$serviciosActivos, &$miembrosEquipo, &$productosDisponibles) {
+    $indexController = new IndexController();
+    $serviciosActivos = $indexController->mostrarActivos();
+    $miembrosEquipo = $indexController->mostrarEquipo();
+    $productosDisponibles = $indexController->mostrarProductos();
 });
 
 
@@ -253,6 +260,78 @@ $router->get('/admin/servicios/desactivar', function() {
     $controller->desactivar();
 });
 
+//RUTAS EQUIPO
+$router->get('/admin/equipo', function() {
+    $controller = new EquipoController();
+    $controller->inicio();
+});
+
+$router->get('/admin/equipo/crear', function() {
+    $controller = new EquipoController();
+    $controller->crear();
+});
+
+$router->post('/admin/equipo/crear', function() {
+    $controller = new EquipoController();
+    $controller->crear();
+});
+
+$router->get('/admin/equipo/editar', function() {
+    $controller = new EquipoController();
+    $controller->editar();
+});
+
+$router->post('/admin/equipo/editar', function() {
+    $controller = new EquipoController();
+    $controller->editar();
+});
+
+$router->get('/admin/equipo/borrar', function() {
+    $controller = new EquipoController();
+    $controller->borrar();
+});
+
+
+//RUTAS SERVICIOS
+$router->get('/admin/productos', function() {
+    $controller = new ProductoController();
+    $controller->inicio();
+});
+
+$router->get('/admin/productos/crear', function() {
+    $controller = new ProductoController();
+    $controller->crear();
+});
+
+$router->post('/admin/productos/crear', function() {
+    $controller = new ProductoController();
+    $controller->crear();
+});
+
+$router->get('/admin/productos/editar', function() {
+    $controller = new ProductoController();
+    $controller->editar();
+});
+
+$router->post('/admin/productos/editar', function() {
+    $controller = new ProductoController();
+    $controller->editar();
+});
+
+$router->get('/admin/productos/borrar', function() {
+    $controller = new ProductoController();
+    $controller->borrar();
+});
+
+$router->get('/admin/productos/activar', function() {
+    $controller = new ProductoController();
+    $controller->activar();
+});
+
+$router->get('/admin/productos/desactivar', function() {
+    $controller = new ProductoController();
+    $controller->desactivar();
+});
 
 // Comprobar rutas
 $router->comprobarRutas();

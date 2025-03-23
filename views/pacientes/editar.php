@@ -1,5 +1,5 @@
 <?php
-$titulo = "Edición ";
+$titulo = "Edición de pacientes";
 $pagina_activa = "pacientes";
 include("./templates/header.php");
 // print_r($_POST);

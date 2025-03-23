@@ -16,7 +16,7 @@ class Router {
         $urlActual = $_SERVER['REQUEST_URI'] ?? '/';
         $urlActual = str_replace('/farma', '', $urlActual);
         $urlActual = explode('?', $urlActual)[0];
-            if ($urlActual === '' || $urlActual === '/') {
+            if ($urlActual === '' || $urlActual === '/' || $urlActual === '/index.php') {
         $urlActual = '/';
     }
         // Elimina parámetros GET

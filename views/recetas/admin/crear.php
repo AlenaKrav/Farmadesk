@@ -58,7 +58,7 @@ include("./templates/header.php");
     </div>
     <div class="card-footer text-muted"></div>
 </div>
-<script>
+
     <?php
     include("./templates/footer.php");
     ?>

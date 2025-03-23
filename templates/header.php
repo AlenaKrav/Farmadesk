@@ -47,20 +47,18 @@ if (!isset($_SESSION['usuario'])) {
 
 <body>
     <header>
-        <nav class="navbar navbar-expand navbar-light bg-light">
+        <nav class="navbar navbar-expand navbar-light center bg-light">
             <div class="nav navbar-nav">
-                <a class="nav-item nav-link <?php echo ($pagina_activa === 'admin') ? 'active' : ''; ?>" aria-current="page" href="<?php echo $url_base; ?>views/dashboard/admin.php">Panel de administración<span class="visually-hidden">(current)</span></a>
+                <a class="nav-item nav-link <?php echo ($pagina_activa === 'admin') ? 'active' : ''; ?>" aria-current="page" href="<?php echo $url_base; ?>views/dashboard/admin.php">Inicio<span class="visually-hidden">(current)</span></a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'servicios') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/servicios">Servicios</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/portafolio/">Productos</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/equipo/">Equipo</a>
-                <a class="nav-item nav-link" href="<?php echo $url_base; ?>admin/configuraciones/">Configuraciones</a>
+                <a class="nav-item nav-link <?php echo ($pagina_activa === 'productos') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/productos">Productos</a>
+                <a class="nav-item nav-link <?php echo ($pagina_activa === 'equipo') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/equipo">Equipo</a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'usuarios') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/usuarios">Usuarios</a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'tareas') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/tareas">Lista de tareas</a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'consultas') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/consultas-formulario">Consultas</a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'pacientes') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/pacientes">Pacientes</a>
                 <a class="nav-item nav-link <?php echo ($pagina_activa === 'recetas') ? 'active' : ''; ?>" href="<?php echo $url_base; ?>admin/recetas">Recetas</a>
                 <a class="nav-item nav-link" href="<?php echo $url_base; ?>logout">Cerrar sesión</a>
-
             </div>
         </nav>
     </header>
