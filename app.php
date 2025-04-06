@@ -1,4 +1,8 @@
 <?php
+
+
+// Primero defines las rutas: En el archivo app.php, primero defines todas las rutas posibles y
+// les asignas las funciones o controladores correspondientes.
 include_once('./Router.php');
 include_once('./controllers/UsuarioController.php');
 include_once('./controllers/PacienteController.php');
@@ -333,6 +337,28 @@ $router->get('/admin/productos/desactivar', function() {
     $controller->desactivar();
 });
 
-// Comprobar rutas
+
+// Luego llamas a comprobarRutas(): Después de definir todas las rutas en app.php, llamas al método comprobarRutas() para que el 
+// Router se encargue de manejar la solicitud real del navegador.
+
+// En ese punto, ya tienes todas las rutas y funciones configuradas, por lo que cuando llega la solicitud HTTP, 
+// el Router puede comprobar:
+
+// ¿Qué URL se solicitó?
+
+// ¿Qué método HTTP (GET, POST) se está utilizando?
+
+// Y con base en esa información, el Router buscará la función asociada a esa ruta y la ejecutará.
+
+//  Este es el punto donde realmente se "maneja" la solicitud. 
+//  Aquí es cuando el Router decide qué hacer con la solicitud, basándose en la URL solicitada y el método HTTP.
+
+
+// El Router busca la URL en los arrays de rutas ($rutasGET o $rutasPOST) y ejecuta la función correspondiente. 
+// Si la ruta y el método coinciden, ejecuta la función asociada, que normalmente sería un controlador que maneja la 
+// solicitud (como UsuarioController).
+
+// Respuesta al cliente: El controlador maneja la lógica del negocio 
+// (por ejemplo, consulta a la base de datos, renderización de vistas, etc.) y devuelve una respuesta al navegador del usuario.
 $router->comprobarRutas();
 ?>
