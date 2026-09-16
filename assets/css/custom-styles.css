@@ -1,122 +1,228 @@
 img.clickable {
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.2s ease-in-out;
-    margin-bottom: 10px;
-    width:60px;
-  }
-  
-  img.clickable:hover {
-    border-color: #007bff; /* Azul de Bootstrap */
-  }
-  
-  
-  span.estado-pendiente{
-    background-color: rgb(214, 30, 30);
-    color:white;
-    border-radius: 30px;
-    padding: 8px;
-    font-weight: bold;
-    font-size: 13px;
-    display: flex;
-justify-content: center;
-width: auto;
-  }
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease-in-out;
+  margin-bottom: 10px;
+  max-width: 60px;
+}
 
-  span.estado-proceso{
-      background-color: rgb(230, 164, 10);
-      color:white;
-      border-radius: 30px;
-      padding: 8px;
-      font-weight: bold;
-      font-size: 13px;
-      white-space: nowrap; 
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: flex;
-justify-content: center;
-width: auto;
-  }
+img.clickable:hover {
+  border-color: #007bff;
+}
 
-    span.estado-terminado{
-        background-color: rgb(7, 181, 74);
-        color:white;
-        border-radius: 30px;
-        padding: 8px;
-        font-weight: bold;
-        font-size: 13px;
-        display: flex;
-justify-content: center;
-width: auto;
-      }
+span.estado-pendiente {
+  background-color: rgb(214, 30, 30);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
 
 
-      span.estado-enviada{
-        background-color: rgb(46, 98, 255);
-        color:white;
-        border-radius: 30px;
-        padding: 8px;
-        font-weight: bold;
-        font-size: 13px;
-        display: flex;
-justify-content: center;
-width: auto;
-      }
+span.estado-proceso {
+  background-color: rgb(230, 164, 10);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
 
+span.paciente-estado-proceso {
+  background-color: rgb(230, 164, 10);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  max-width: 150px;
+}
 
-      span.estado-rechazado{
-        background-color: rgb(214, 30, 30);
-        color:white;
-        border-radius: 30px;
-        padding: 8px;
-        font-weight: bold;
-        font-size: 13px;
-        display: flex;
-justify-content: center;
-width: auto;
-      }
+span.estado-terminado {
+  background-color: rgb(7, 181, 74);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
 
+span.paciente-estado-terminado {
+  background-color: rgb(7, 181, 74);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  max-width: 150px;
+}
 
-      .error {
-        display: flex;
-        align-items: center;    /* Alinea verticalmente */
-        justify-content: center; /* Alinea horizontalmente */
-        color: #ff4d4d;
-        background-color: #ffe6e6;
-        border: 1px solid #ff4d4d;
-        padding: 10px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: bold;
-        margin-top: 5px;
-        text-align: center;
-        height: 35px; /* O el tamaño que necesites */
-        display:none;
-      }
+span.estado-enviada {
+  background-color: rgb(46, 98, 255);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
 
+span.paciente-estado-enviada {
+  background-color: rgb(46, 98, 255);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  max-width: 150px;
+}
 
-      td.dt-type-date{
-        white-space: nowrap; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+span.estado-rechazado {
+  background-color: rgb(214, 30, 30);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+}
 
-      #sugerencias{
-        display: none;
-        border: 1px solid #ccc;
-        color:#007bff;
-        font-weight: bold;
-        padding:8px;
-        cursor: pointer;
-      }
+span.paciente-estado-rechazado {
+  background-color: rgb(214, 30, 30);
+  color: white;
+  border-radius: 30px;
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  max-width: 150px;
+}
 
-      #sugerencias.desactivado {
-        color: rgb(182, 11, 11);
-        background-color: #ffd4d4;
-        pointer-events: none;
-        cursor: none;
-    }
-    .invalid-feedback{
-      font-weight: bold;
-    }
+.card-header {
+  font-weight: bold;
+}
 
+.text-danger{
+display: flex;
+color:#007bff;
+}
+
+td.dt-type-date {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#sugerencias {
+  display: none;
+  border: 1px solid #ccc;
+  color: #007bff;
+  font-weight: bold;
+  padding: 8px;
+  cursor: pointer;
+}
+
+#sugerencias.desactivado {
+  color: rgb(182, 11, 11);
+  background-color: #ffd4d4;
+  pointer-events: none;
+  cursor: none;
+}
+
+.invalid-feedback {
+  font-weight: bold;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.container .login-card {
+  background-color: #f0fff4;
+}
+
+.container .login-card .card-header {
+  font-weight: bold;
+  text-align: center;
+  color: #504b4b;
+  font-size: 18px;
+}
+
+#entrar {
+  border: 0;
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 50px;
+  background-color: #5cb874;
+  color:white;
+  display: block;
+  margin: 0 auto;
+}
+
+#volver{
+  padding-top: 12px;;
+  text-align:center;
+  display:block;
+}
+
+.navbar-expand .navbar-nav {
+  padding-left: 10px;
+  display: flex;
+}
+
+.navbar-nav .nav-link.active {
+  font-weight: bold;
+  color: #5cb874;
+}
+
+table.dataTable th,
+table.dataTable td {
+  text-align: left;
+}
+
+#BtnFormulario {
+  border: 0;
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 50px;
+  background-color: #5cb874;
+  color:white;
+}
+
+.bi-plus-lg{
+  padding-right: 5px;
+}
+
+.btn-xs{
+    padding: 0.360rem 0.60rem;
+}

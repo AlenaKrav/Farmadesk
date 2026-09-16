@@ -1,6 +1,7 @@
 <?php
 include_once('./models/Paciente.php');
 include_once('./config/conexion.php');
+require_once('./helpers/validaciones.php');
 
 BD::crearInstancia();
 
@@ -8,62 +9,167 @@ class PacienteController
 {
     public function inicio()
     {
-        $mensajes = [];
-        //OJO ES UN ARRAY DE OBJETOS
         $pacientes = Paciente::consultar();
-        if ($pacientes) {
-            // echo "Tenemos pacientes";
-        } else {
-            "Error";
-        }
+        if (!$pacientes) {
+            $pacientes = [];
+        } 
         include_once("./views/pacientes/index.php");
     }
 
 
     public function crear()
     {
-        if (isset($_POST['agregar'])) {
+        $errores = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
             if (isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['dni']) && isset($_POST['fecha_nacimiento']) && isset($_POST['correo']) && isset($_POST['telefono']) && isset($_POST['direccion']) && isset($_POST['cip_aut'])) {
-                $nombre = $_POST['nombre'];
-                $apellidos = $_POST['apellidos'];
-                $dni = $_POST['dni'];
-                $fecha_nacimiento = $_POST['fecha_nacimiento'];
-                $correo = $_POST['correo'];
-                $telefono = $_POST['telefono'];
-                $direccion = $_POST['direccion'];
-                $cip_aut = $_POST['cip_aut'];
+                $nombre = trim($_POST['nombre'] ?? '');
+                $apellidos = trim($_POST['apellidos'] ?? '');
+                $dni = trim($_POST['dni'] ?? '');
+                $fecha_nacimiento = trim($_POST['fecha_nacimiento'] ?? '');
+                $correo = trim($_POST['correo'] ?? '');
+                $telefono = trim($_POST['telefono'] ?? '');
+                $direccion = trim($_POST['direccion'] ?? '');
+                $cip_aut = trim($_POST['cip_aut'] ?? '');
 
-                if (empty($nombre) || empty($apellidos) || empty($dni) || empty($fecha_nacimiento) || empty($correo) || empty($telefono) || empty($direccion) || empty($cip_aut)) {
-                    return "Error: Por favor completa todos los campos.";
+                if (inputVacio($nombre)) {
+                    $errores['nombre'] = "Debes introducir un nombre de paciente";
                 }
-                Paciente::crear($nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
-                header("Location: /farma/admin/pacientes");
-                exit();
-            }
-        }
-            include_once("./views/pacientes/crear.php");
 
-    }
+                if (!validarCadena($nombre)) {
+                    $errores['nombre'] = "El nombre solo puede contener letras";
+                }
 
-    public function editar() {
-        if (isset($_POST['actualizar'])) {
-            if (isset($_POST['id_paciente']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['dni']) && isset($_POST['fecha_nacimiento']) && isset($_POST['correo']) && isset($_POST['telefono']) && isset($_POST['direccion']) && isset($_POST['cip_aut'])) {
-                $id_paciente = $_POST['id_paciente'];
-                $nombre = $_POST['nombre'];
-                $apellidos = $_POST['apellidos'];
-                $dni = $_POST['dni'];
-                $fecha_nacimiento = $_POST['fecha_nacimiento'];
-                $correo = $_POST['correo'];
-                $telefono = $_POST['telefono'];
-                $direccion = $_POST['direccion'];
-                $cip_aut = $_POST['cip_aut'];
+                if (inputVacio($apellidos)) {
+                    $errores['apellidos'] = "Debes introducir un apellido de paciente";
+                }
 
-                if (empty($nombre) || empty($apellidos) || empty($dni) || empty($fecha_nacimiento) || empty($correo) || empty($telefono) || empty($direccion) || empty($cip_aut)) {
-                    return "Por favor completa todos los campos.";
-                } else {
-                    Paciente::editar($id_paciente, $nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
+                if (!validarCadena($apellidos)) {
+                    $errores['apellidos'] = "El apellido solo puede contener letras";
+                }
+
+                if (inputVacio($dni)) {
+                    $errores['dni'] = "Debes introducir un número de identificación";
+                }else if (!validarDocIdentidad($dni)) {
+                    $errores['dni'] = "Formato inválido del documento de indentificación";
+                }
+
+                if(inputVacio($fecha_nacimiento)){
+                    $errores['fecha_nacimiento'] = "Debes introducir una fecha de nacimiento";
+                }
+                else if (!validarFecha($fecha_nacimiento)) {
+                    $errores['fecha_nacimiento'] = "Formato inválido de fecha de nacimiento";
+                }
+
+                if (inputVacio($correo)) {
+                    $errores['correo'] = "Debes introducir un correo electrónico";
+                } else if (!validarCorreo($correo)) {
+                    $errores['correo'] = "Formato inválido de correo electrónico";
+                }
+
+                if (inputVacio($telefono)) {
+                    $errores['telefono'] = "Debes introducir un número de teléfono";
+                } else if (!validarTlf($telefono)) {
+                    $errores['telefono'] = "Formato inválido de número de teléfono";
+                }
+
+                if (inputVacio($direccion)) {
+                    $errores['direccion'] = "Debes introducir una dirección";
+                }
+
+                if (inputVacio($cip_aut)) {
+                    $errores['cip_aut'] = "Debes introducir un CIP_AUT";
+                }else if (!validar_cip_andalucia($cip_aut)) {
+                    $errores['cip_aut'] = "Formato inválido de CIP_AUT";
+                }
+
+                if (empty($errores)) {
+                    $paciente = Paciente::crear($nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
+                    if($paciente['error']){
+                        $errores[$paciente['campo']] = $paciente['mensaje'];
+                    }
+                    else{
                     header("Location: /farma/admin/pacientes");
                     exit();
+                    }
+                }
+            }
+        }
+        include_once("./views/pacientes/crear.php");
+    }
+
+    public function editar()
+    {
+        $errores = [];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['actualizar'])) {
+            if (isset($_POST['id_paciente']) && isset($_POST['nombre']) && isset($_POST['apellidos']) && isset($_POST['dni']) && isset($_POST['fecha_nacimiento']) && isset($_POST['correo']) && isset($_POST['telefono']) && isset($_POST['direccion']) && isset($_POST['cip_aut'])) {
+                $id_paciente = trim($_POST['id_paciente'] ?? '');
+                $nombre = trim($_POST['nombre'] ?? '');
+                $apellidos = trim($_POST['apellidos'] ?? '');
+                $dni = trim($_POST['dni'] ?? '');
+                $fecha_nacimiento = trim($_POST['fecha_nacimiento'] ?? '');
+                $correo = trim($_POST['correo'] ?? '');
+                $telefono = trim($_POST['telefono'] ?? '');
+                $direccion = trim($_POST['direccion'] ?? '');
+                $cip_aut = trim($_POST['cip_aut'] ?? '');
+
+
+                if (inputVacio($nombre)) {
+                    $errores['nombre'] = "Debes introducir un nombre de paciente";
+                }else if (!validarCadena($nombre)) {
+                    $errores['nombre'] = "El nombre solo puede contener letras";
+                }
+
+                if (inputVacio($apellidos)) {
+                    $errores['apellidos'] = "Debes introducir un apellido de paciente";
+                } else if (!validarCadena($apellidos)) {
+                    $errores['apellidos'] = "El apellido solo puede contener letras";
+                }
+
+                if (inputVacio($dni)) {
+                    $errores['dni'] = "Debes introducir un número de identificación";
+                }else if (!validarDocIdentidad($dni)) {
+                    $errores['dni'] = "Formato inválido del documento de indentificación";
+                }
+
+                if(inputVacio($fecha_nacimiento)){
+                    $errores['fecha_nacimiento'] = "Debes introducir una fecha de nacimiento";
+                }
+                else if (!validarFecha($fecha_nacimiento)) {
+                    $errores['fecha_nacimiento'] = "Formato inválido de fecha de nacimiento";
+                }
+
+                if (inputVacio($correo)) {
+                    $errores['correo'] = "Debes introducir un correo electrónico";
+                } else if (!validarCorreo($correo)) {
+                    $errores['correo'] = "Formato inválido de correo electrónico";
+                }
+
+                if (inputVacio($telefono)) {
+                    $errores['telefono'] = "Debes introducir un número teléfono";
+                } else if (!validarTlf($telefono)) {
+                    $errores['telefono'] = "Formato inválido de número teléfono";
+                }
+
+                if (inputVacio($direccion)) {
+                    $errores['direccion'] = "Debes introducir una dirección";
+                }
+
+                if (inputVacio($cip_aut)) {
+                    $errores['cip_aut'] = "Debes introducir un CIP_AUT";
+                }else if (!validar_cip_andalucia($cip_aut)) {
+                    $errores['cip_aut'] = "Formato inválido de CIP_AUT";
+                }
+                
+                if (empty($errores)) {
+                    $pacienteAct = Paciente::editar($id_paciente, $nombre, $apellidos, $dni, $fecha_nacimiento, $correo, $telefono, $direccion, $cip_aut);
+                    if($pacienteAct['error']){
+                        $errores[$pacienteAct['campo']] = $pacienteAct['mensaje'];
+                    }
+                    else{
+                    header("Location: /farma/admin/pacientes");
+                    exit();
+                    }
+                
                 }
             }
         }
@@ -71,7 +177,6 @@ class PacienteController
             $idBuscar = $_GET['id'];
             $paciente = Paciente::buscar($idBuscar);
         }
-        // $usuario = Usuario::buscar(1);
         include_once("./views/pacientes/editar.php");
     }
 
@@ -85,16 +190,17 @@ class PacienteController
         exit();
     }
 
-    public function sugerencias() {
+    public function sugerencias()
+    {
         if (!isset($_GET['term']) || empty(trim($_GET['term']))) {
-            echo json_encode([]); // Devuelve un array vacío si el término no está definido o es solo espacios en blanco
+            echo json_encode([]);
             exit();
         }
-    
-        $term = trim($_GET['term']); // Eliminar espacios extra
+
+        $term = trim($_GET['term']);
         $sugerencias = Paciente::sugerencias($term);
-    
-        header('Content-Type: application/json'); // Asegurar el tipo de respuesta JSON
+
+        header('Content-Type: application/json');
         echo json_encode($sugerencias);
         exit();
     }

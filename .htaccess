@@ -1,32 +1,11 @@
 <IfModule mod_rewrite.c>
-# RewriteEngine On: Activa el motor de reescritura de URLs, que permite reescribir
-# las URLs entrantes sin que el usuario lo vea (es decir, oculta las rutas físicas de los archivos en el servidor).
     RewriteEngine On
 
-    # Ajusta el directorio base si el proyecto está en una subcarpeta
-    # RewriteBase /farma/: Define el directorio base de tu proyecto. Si tu proyecto está alojado en una subcarpeta (en este caso, farma), 
-    # esto asegura que todas las reglas de reescritura se aplican correctamente a partir de ese directorio base.
     RewriteBase /farma/
-    #nuevo
-    # Establece el archivo index.php como el archivo principal que se sirve cuando se accede a un directorio (por ejemplo, http://mi-sitio.com/).
     DirectoryIndex index.php
 
-    # nuevo No redirigir la raíz para que cargue index.php automáticamente
-    # RewriteCond %{REQUEST_URI} !^/farma/$
-    
-    #nuevo
-    # RewriteRule ^$ app.php [L,QSA]
-
-
-
-    # Redirige todas las peticiones a app.php, excepto archivos y carpetas existentes
-    #  Esta condición asegura que si la solicitud es para un archivo real (por ejemplo, un archivo CSS o una imagen), 
-    # no se redirija a app.php. Se ignoran las solicitudes que son para archivos que existen físicamente en el servidor.
     RewriteCond %{REQUEST_FILENAME} !-f
-    # Similar a la anterior, pero en este caso, se verifica si la solicitud es para un directorio real. Si es así, no se redirige a app.php.
     RewriteCond %{REQUEST_FILENAME} !-d
 
-    # Esta regla redirige cualquier otra solicitud que no sea un archivo o directorio físico a app.php. 
-    # La expresión ^(.+)$ captura todo el resto de la URL solicitada y la pasa como parámetro a app.php.
     RewriteRule ^(.+)$ app.php [L,QSA]
 </IfModule>

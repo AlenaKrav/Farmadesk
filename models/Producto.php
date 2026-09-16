@@ -1,5 +1,6 @@
 <?php
-class Producto{
+class Producto
+{
     public $id;
     public $imagen;
     public $titulo;
@@ -17,37 +18,51 @@ class Producto{
 
     public static function crear($imagen, $titulo, $descripcion)
     {
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("INSERT INTO `tbl_productos`(`id`, `imagen`, `titulo`, `descripcion`, `activo`) VALUES (NULL, :imagen, :titulo, :descripcion, 1);");
-        $sql->bindParam(":imagen", $imagen);
-        $sql->bindParam(":titulo", $titulo);
-        $sql->bindParam(":descripcion", $descripcion);
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("INSERT INTO `tbl_productos`(`id`, `imagen`, `titulo`, `descripcion`, `activo`) VALUES (NULL, :imagen, :titulo, :descripcion, 1);");
+            $sql->bindParam(":imagen", $imagen);
+            $sql->bindParam(":titulo", $titulo);
+            $sql->bindParam(":descripcion", $descripcion);
 
-        //ejecutamos la query
-        $sql->execute();
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al crear un producto " . $e->getMessage();
+            return false;
+        }
     }
 
     public static function desactivar($id)
     {
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("UPDATE tbl_productos SET activo = 0 WHERE id=:id");
-        $sql->bindParam(":id", $id);
-        $sql->execute();
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("UPDATE tbl_productos SET activo = 0 WHERE id=:id");
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al desactivar el producto con ID $id " . $e->getMessage();
+            return false;
+        }
     }
 
 
     public static function activar($id)
     {
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("UPDATE tbl_productos SET activo = 1 WHERE id=:id");
-        $sql->bindParam(":id", $id);
-        $sql->execute();
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("UPDATE tbl_productos SET activo = 1 WHERE id=:id");
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al activar el producto con ID $id " . $e->getMessage();
+            return false;
+        }
     }
 
-        //FUNCION PARA MOSTRAR LOS SERVICIOS EN LA HOME
-        public static function mostrarProductos()
-        {
-            $productosActivos = [];
+    public static function mostrarProductos()
+    {
+        $productosActivos = [];
+        try {
             $conexion = BD::crearInstancia();
             $sql = $conexion->prepare("SELECT * FROM tbl_productos WHERE activo=1");
             $sql->execute();
@@ -56,117 +71,132 @@ class Producto{
                 $productosActivos[] = $productoActivo;
             }
             return $productosActivos;
+        } catch (PDOException $e) {
+            echo "Error al mostrar los productos activos" . $e->getMessage();
+            return false;
         }
+    }
 
-        public static function consultar()
-        {
+    public static function consultar()
+    {
+        try {
             $listaProductos = [];
             $conexion = BD::crearInstancia();
             $sql = $conexion->prepare("SELECT * FROM tbl_productos");
-    
+
             $sql->execute();
-    
+
             foreach ($sql->fetchAll() as $producto) {
-                //por cada fila recorrida, se usa el constructor para crear un objeto con los datos de esa fila
-                //agregamos ese objeto resultante, al arraya
-                $nuevoProducto = new Producto($producto['id'], $producto['imagen'], $producto['titulo'] ,$producto['descripcion'], $producto['activo']);
+                $nuevoProducto = new Producto($producto['id'], $producto['imagen'], $producto['titulo'], $producto['descripcion'], $producto['activo']);
                 $listaProductos[] = $nuevoProducto;
             }
             return $listaProductos;
+        } catch (PDOException $e) {
+            echo "Error al mostrar los productos " . $e->getMessage();
+            return false;
         }
-
-
-        public static function buscar($id)
-    {
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("SELECT * FROM tbl_productos WHERE id=:id");
-        $sql->bindParam(":id", $id);
-        $sql->execute();
-        $producto = $sql->fetch();
-        return new Producto($producto['id'], $producto['imagen'], $producto['titulo'], $producto['descripcion'], $producto['activo']);
     }
 
 
+    public static function buscar($id)
+    {
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT * FROM tbl_productos WHERE id=:id");
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+            $producto = $sql->fetch();
+            return new Producto($producto['id'], $producto['imagen'], $producto['titulo'], $producto['descripcion'], $producto['activo']);
+        } catch (PDOException $e) {
+            echo "Error al buscar el producto con el ID $id " . $e->getMessage();
+            return false;
+        }
+    }
+
     public static function obtenerImagen($id)
     {
-        $conexion = BD::crearInstancia();
-        //buscamos la imagen del registro con ese ID
-        $sql = $conexion->prepare("SELECT imagen FROM tbl_productos WHERE id=:id");
-        $sql->bindParam(":id", $id);
-        $sql->execute();
-        //recogemos la imagen del registro
-        $imagen = $sql->fetch();
-        return $imagen['imagen'] ?? null;
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT imagen FROM tbl_productos WHERE id=:id");
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+            $imagen = $sql->fetch();
+            return $imagen['imagen'] ?? null;
+        } catch (PDOException $e) {
+            echo "Error al obtener la imagen " . $e->getMessage();
+            return false;
         }
+    }
 
 
-        public static function borraImagen($imagen)
-        {
+    public static function borraImagen($imagen)
+    {
+        try {
             $ruta_imagen = "assets/img/products/" . $imagen;
             if (file_exists($ruta_imagen)) {
                 unlink($ruta_imagen);
             }
+        } catch (PDOException $e) {
+            echo "Error al borrar la imagen " . $e->getMessage();
+            return false;
         }
+    }
 
-        public static function actualizarImagen($id, $imagen)
-        {
+    public static function actualizarImagen($id, $imagen)
+    {
+        try {
             $conexion = BD::crearInstancia();
-                $sql = $conexion->prepare("UPDATE tbl_productos SET imagen =:imagen WHERE id =:id");
-                $sql->bindParam(":imagen", $imagen);
-                $sql->bindParam(":id", $id);
-                $sql->execute();
+            $sql = $conexion->prepare("UPDATE tbl_productos SET imagen =:imagen WHERE id =:id");
+            $sql->bindParam(":imagen", $imagen);
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al actualizar la imagen " . $e->getMessage();
+            return false;
+        }
     }
 
 
     public static function editar($id, $imagen, $titulo, $descripcion)
     {
-
-        $conexion = BD::crearInstancia();
-        //obtenemos la imagen de la receta a actualizar
-        if ($imagen != "") {
-            //obtenemos la img actual de la receta
-            $imagen_actual = self::obtenerImagen($id);
-            //cambio
-            if ($imagen_actual && $imagen != $imagen_actual) {
-                self::borraImagen($imagen_actual);
+        try {
+            $conexion = BD::crearInstancia();
+            if ($imagen != "") {
+                $imagen_actual = self::obtenerImagen($id);
+                if ($imagen_actual && $imagen != $imagen_actual) {
+                    self::borraImagen($imagen_actual);
+                }
             }
-        }
 
-        $sql = $conexion->prepare("UPDATE tbl_productos SET imagen=:imagen, titulo=:titulo, descripcion=:descripcion WHERE id=:id");
-        $sql->bindParam(":imagen", $imagen);
-        $sql->bindParam(":titulo", $titulo);
-        $sql->bindParam(":descripcion", $descripcion);
-        $sql->bindParam(":id", $id);
-        $sql->execute();
+            $sql = $conexion->prepare("UPDATE tbl_productos SET imagen=:imagen, titulo=:titulo, descripcion=:descripcion WHERE id=:id");
+            $sql->bindParam(":imagen", $imagen);
+            $sql->bindParam(":titulo", $titulo);
+            $sql->bindParam(":descripcion", $descripcion);
+            $sql->bindParam(":id", $id);
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al editar el producto con ID $id " . $e->getMessage();
+            return false;
+        }
     }
 
     public static function borrar($id)
     {
-        $conexion = BD::crearInstancia();
-        //obtenemos la imagen del registro a borrar
-        $imagen = self::obtenerImagen($id);
+        try {
+            $conexion = BD::crearInstancia();
+            $imagen = self::obtenerImagen($id);
 
-        if ($imagen) {
-            self::borraImagen($imagen);
+            if ($imagen) {
+                self::borraImagen($imagen);
+            }
+
+            $sql = $conexion->prepare("DELETE FROM tbl_productos WHERE id = :id");
+            $sql->bindParam(":id", $id);
+            return $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al borrar el producto con ID $id " . $e->getMessage();
+            return false;
         }
-
-        $sql = $conexion->prepare("DELETE FROM tbl_productos WHERE id = :id");
-        $sql->bindParam(":id", $id);
-        return $sql->execute();
     }
-    
-
-    
-
-
-
 }
-
-
-
-
-
-
-
-
 ?>

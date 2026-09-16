@@ -1,7 +1,7 @@
 <?php
 include_once('./models/Receta.php');
 include_once('./config/conexion.php');
-// include_once('./config/config_session.php');
+require_once('./helpers/validaciones.php');
 
 BD::crearInstancia();
 
@@ -10,64 +10,82 @@ class PacienteRecetaController
     public function inicio()
     {
         session_start();
-
-        if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] !== 3) {
-            echo "Acceso no autorizado desde paciente receta controller";
-            header("Location: /farma/login");
-            exit;
-        }
-
         $id_paciente = $_SESSION['id_paciente'];
         $recetasPaciente = Receta::buscarRecetaPaciente($id_paciente);
 
-        if ($recetasPaciente) {
-            echo "Tenemos recetas";
-        } else {
-            echo "Todavía no tienes ninguna receta registrada";
+        if (!$recetasPaciente) {
+            $recetasPaciente = [];
         }
         include_once("./views/recetas/paciente/index.php");
     }
 
 
-    //METODO FUNCIONAL Nº1
+
     public function crear()
     {
-
-        //iniciamos la sesion
         session_start();
+        $errores = [];
 
-        if (isset($_POST['agregar'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
             if (isset($_FILES['imagen']['name']) && isset($_POST['nombre']) && isset($_POST['fecha'])) {
                 $paciente_id = $_SESSION['id_paciente'];
-                $imagen = $_FILES['imagen']['name'];
-                $nombre = $_POST['nombre'];
-                $fecha = $_POST['fecha'];
+                $imagen = trim($_FILES['imagen']['name'] ?? '');
+                $nombre = trim($_POST['nombre'] ?? '');
+                $fecha = trim($_POST['fecha'] ?? '');
                 $codigo_nacional = NULL;
                 $observaciones = NULL;
 
-                if (empty($paciente_id) || empty($imagen) || empty($nombre) || empty($fecha) || empty($codigo_nacional) ||  empty($observaciones)) {
-                    echo "Completa todos los campos";
+                if (inputVacio($nombre)) {
+                    $errores['nombre'] = "Debes introducir un nombre de medicamento";
                 }
 
-                $fecha_imagen = new DateTime();
-                $nombre_archivo_imagen = ($imagen != "") ? $fecha_imagen->getTimestamp() . "_" . $imagen : "";
-
-                $tmp_imagen =  $_FILES['imagen']['tmp_name'];
-
-                if ($tmp_imagen != "") {
-                    move_uploaded_file($tmp_imagen, "assets/img/recetas/" . $nombre_archivo_imagen);
+                if (inputVacio($fecha)) {
+                    $errores['fecha'] = "Debes introducir una fecha de prescripción";
+                } else if (!validarFechaPrescripción($fecha)) {
+                    $errores['fecha'] = "Formato inválido de fecha de prescripción";
                 }
 
-                Receta::crear($paciente_id, $nombre_archivo_imagen, $nombre, $fecha, $codigo_nacional, $observaciones);
-                header("Location: /farma/paciente/recetas");
-                exit();
+
+                if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+                    $formatos_permitidos = ['image/jpeg', 'image/png'];
+                    $tamano_maximo = 5 * 1024 * 1024;
+
+                    $tipo_img = $_FILES['imagen']['type'];
+                    $tamano_img = $_FILES['imagen']['size'];
+                    $tmp_imagen = $_FILES['imagen']['tmp_name'];
+
+                    if (!in_array($tipo_img, $formatos_permitidos)) {
+                        $errores['imagen'] = "Solo se permiten imágenes en formato JPG o PNG";
+                    }
+
+                    if ($tamano_img > $tamano_maximo) {
+                        $errores['imagen'] = "El tamaño de la imagen no debe superar los 5MB";
+                    }
+
+                    if (empty($errores['imagen'])) {
+                        $fecha_imagen = new DateTime();
+                        if ($imagen != "") {
+                            $nombre_archivo_imagen = $fecha_imagen->getTimestamp() . "_" . $imagen;
+                            move_uploaded_file($tmp_imagen, "assets/img/recetas/" . $nombre_archivo_imagen);
+                        } else {
+                            $nombre_archivo_imagen = "";
+                        }
+                    }
+                } else {
+                    $errores['imagen'] = "Debes subir una imagen válida";
+                }
+                if (empty($errores)) {
+                    Receta::crear($paciente_id, $nombre_archivo_imagen, $nombre, $fecha, $codigo_nacional, $observaciones);
+                    header("Location: /farma/paciente/recetas");
+                    exit();
+                }
             }
         }
         include_once("./views/recetas/paciente/crear.php");
     }
 
 
-    
+
     public function borrar()
     {
         if (isset($_GET['id'])) {

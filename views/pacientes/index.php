@@ -2,12 +2,11 @@
 $titulo = "Listado de pacientes";
 $pagina_activa = "pacientes";
 include("./templates/header.php");
-// var_dump($pacientes);
 ?>
 <div class="card">
     <div class="card-header">
-        <a name="" id="" class="btn btn-success" href="<?php echo $url_base?>admin/pacientes/crear" role="button">Agregar registros</a>
-</div>
+        <a name="" id="" class="btn btn-success" href="<?php echo $url_base ?>admin/pacientes/crear" role="button"><i class="bi bi-plus-lg"></i>Añadir un nuevo paciente</a>
+    </div>
     <div class="card-body">
         <div
             class="table-responsive">
@@ -20,7 +19,7 @@ include("./templates/header.php");
                         <th scope="col">Información personal</th>
                         <th scope="col">Fecha de nacimiento</th>
                         <th scope="col">Información adicional</th>
-                        <th scope="col">Direccion</th>
+                        <th scope="col">Dirección</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -34,10 +33,8 @@ include("./templates/header.php");
                             <td><?php echo $registro->correo . "<br>" . $registro->telefono; ?></td>
                             <td><?php echo $registro->direccion; ?></td>
                             <td>
-                                <a class="btn btn-info" href="pacientes/editar?id=<?php echo $registro->id_paciente; ?>">Editar</a>
-                                <!-- <a class="btn btn-danger" href="pacientes/borrar?id=<?php echo $registro->id_paciente; ?>">Borrar</a> -->
-                                <a href="pacientes/borrar?id=<?php echo $registro->id_paciente; ?>" class="btn btn-danger" onclick="confirmarBorrado(event, <?php echo $registro->id_paciente; ?>)">Borrar</a>
-                                <!-- <a class="btn btn-danger" onclick="confirmarBorrado()">Borrar</a> -->
+                                <a name="editar" id="editar" class="btn btn-success btn-xs rounded-2" data-toggle="tooltip" title="Editar" href="pacientes/editar?id=<?php echo $registro->id_paciente; ?>" role="button"><i class="fas fa-edit fa-sm"></i></a>
+                                <a name="borrar" id="borrar" class="btn btn-danger btn-xs rounded-2" data-toggle="tooltip" title="Borrar" href="pacientes/borrar?id=<?php echo $registro->id_paciente; ?>" onclick="confirmarBorrado(event, <?php echo $registro->id_paciente; ?>)"><i class="fas fa-trash fa-sm"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -49,4 +46,3 @@ include("./templates/header.php");
 <?php
 include("./templates/footer.php");
 ?>
-

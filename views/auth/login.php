@@ -1,3 +1,10 @@
+<?php
+$url_base = "http://localhost/farma/";
+?>
+<!-- Estilos propios -->
+<link href="<?php echo $url_base; ?>assets/css/custom-styles.css" rel="stylesheet" />
+<link href="/farma/assets/img/favicon.png" rel="icon">
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +15,6 @@
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <!-- Bootstrap CSS v5.2.1 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -21,58 +27,46 @@
     <header>
     </header>
     <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-4">
-                </div>
-                <div class="col-4">
-                <br/><br/>
-                <?php if (!empty($mensajes)) { ?>
-                    <?php foreach ($mensajes as $mensaje) { ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                <strong><?php echo $mensaje; ?></strong>
+        <div class="login-wrapper">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-sm-8 col-md-6 col-lg-4">
+                        <br /><br />
+                        <?php if (!empty($mensajes)) { ?>
+                            <?php foreach ($mensajes as $mensaje) { ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <strong><?php echo $mensaje; ?></strong>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                        <div class="card login-card">
+                            <div class="card-header">Login</div>
+                            <div class="card-body">
+                                <form action="" method="post" action='/login'>
+                                    <div class="mb-3">
+                                        <label for="usuario" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo isset($_POST['usuario']) ? $_POST['usuario'] : ''; ?>" aria-describedby="helpId" placeholder="" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="" />
+                                    </div>
+                                    <input name="entrar" id="entrar" type="submit" value="Entrar" />
+                                    <a id="volver" href="<?php echo $url_base ?>">Volver a la página principal</a>
+                                </form>
                             </div>
-                            <?php } ?>
-                            <?php } ?>
-                    <div class="card">
-                        <div class="card-header">Login</div>
-                        <div class="card-body">
-                            <script>
-                                var alertList = document.querySelectorAll(".alert");
-                                alertList.forEach(function (alert) {
-                                    new bootstrap.Alert(alert);
-                                });
-                            </script>
-                            
-                            <form action="" method="post" action='/login'>
-                                <div class="mb-3">
-                                    <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="" />
-                                </div>
-                                <!-- <a name="" id="" class="btn btn-primary" href="index.php" role="button">Entrar</a> -->
-                                <input name="entrar" id="entrar" class="btn btn-primary" type="submit" value="Entrar"/>
-                                
-                                
-                            </form>
+                            <div class="card-footer text-muted"></div>
                         </div>
-                        <div class="card-footer text-muted"></div>
+
                     </div>
-
                 </div>
-
             </div>
         </div>
 
-
     </main>
     <footer>
-        <!-- place footer here -->
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
     <script

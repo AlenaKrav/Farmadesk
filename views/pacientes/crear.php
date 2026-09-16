@@ -1,58 +1,79 @@
 <?php
-$titulo = "Dar de alta un paciente";
+$titulo = "Añadir un nuevo paciente";
 $pagina_activa = "pacientes";
 include("./templates/header.php");
-// print_r($_POST);
 ?>
 
 <div class="card">
-    <div class="card-header">Dar de alta un paciente</div>
+    <div class="card-header">Añadir un nuevo paciente</div>
     <div class="card-body">
         <form action="" method="post">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+                <input type="text" class="form-control <?php echo isset($errores['nombre']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : ''; ?>" name="nombre" id="nombre" placeholder="Nombre">
+                <?php if (isset($errores['nombre'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['nombre']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos:</label>
-                <input type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos" />
+                <input type="text" class="form-control <?php echo isset($errores['apellidos']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['apellidos']) ? $_POST['apellidos'] : ''; ?>" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos">
+                <?php if (isset($errores['apellidos'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['apellidos']; ?></div>
+                <?php endif; ?>
+
             </div>
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI:</label>
-                <input type="text" class="form-control" name="dni" id="dni" aria-describedby="helpId" placeholder="DNI" />
+                <input type="text" class="form-control <?php echo isset($errores['dni']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['dni']) ? $_POST['dni'] : ''; ?>" name="dni" id="dni" aria-describedby="helpId" placeholder="DNI">
+                <?php if (isset($errores['dni'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['dni']; ?></div>
+                <?php endif; ?>
+
             </div>
             <div class="mb-3">
                 <label for="fecha_nacimiento" class="form-label">Fecha nacimiento:</label>
-                <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" aria-describedby="helpId" placeholder="Fecha nacimiento" />
+                <input type="date" class="form-control <?php echo isset($errores['fecha_nacimiento']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['fecha_nacimiento']) ? $_POST['fecha_nacimiento'] : ''; ?>" name="fecha_nacimiento" id="fecha_nacimiento" aria-describedby="helpId" placeholder="Fecha nacimiento">
+                <?php if (isset($errores['fecha_nacimiento'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['fecha_nacimiento']; ?></div>
+                <?php endif; ?>
+
             </div>
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo electrónico:</label>
-                <input type="email" class="form-control" name="correo" id="correo" aria-describedby="helpId" placeholder="Correo" />
+                <input type="email" class="form-control <?php echo isset($errores['correo']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['correo']) ? $_POST['correo'] : ''; ?>" name="correo" id="correo" aria-describedby="helpId" placeholder="Correo">
+                <?php if (isset($errores['correo'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['correo']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Telefono:</label>
-                <input type="tel" class="form-control" name="telefono" id="telefono" aria-describedby="helpId" placeholder="Telefono" />
+                <input type="tel" class="form-control <?php echo isset($errores['telefono']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['telefono']) ? $_POST['telefono'] : ''; ?>" name="telefono" id="telefono" aria-describedby="helpId" placeholder="Telefono">
+                <?php if (isset($errores['telefono'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['telefono']; ?></div>
+                <?php endif; ?>
+
             </div>
             <div class="mb-3">
                 <label for="direccion" class="form-label">Direccion:</label>
-                <input type="text" class="form-control" name="direccion" id="direccion" aria-describedby="helpId" placeholder="Direccion" />
+                <input type="text" class="form-control <?php echo isset($errores['direccion']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['direccion']) ? $_POST['direccion'] : ''; ?>" name="direccion" id="direccion" aria-describedby="helpId" placeholder="Direccion">
+                <?php if (isset($errores['direccion'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['direccion']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="cip_aut" class="form-label">CIP-AUT:</label>
-                <input type="text" class="form-control" name="cip_aut" id="cip_aut" aria-describedby="helpId" placeholder="CIP_AUT" />
+                <input type="text" class="form-control <?php echo isset($errores['cip_aut']) ? 'is-invalid' : ''; ?>" value="<?php echo isset($_POST['cip_aut']) ? $_POST['cip_aut'] : ''; ?>" name="cip_aut" id="cip_aut" aria-describedby="helpId" placeholder="CIP_AUT">
+                <?php if (isset($errores['cip_aut'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['cip_aut']; ?></div>
+                <?php endif; ?>
             </div>
             <button type="submit" name="agregar" class="btn btn-success">Agregar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base?>admin/pacientes" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base ?>admin/pacientes" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>
 </div>
-<script>
-                                var alertList = document.querySelectorAll(".alert");
-                                alertList.forEach(function (alert) {
-                                    new bootstrap.Alert(alert);
-                                });
-                            </script>
 <?php
 include("./templates/footer.php");
 ?>

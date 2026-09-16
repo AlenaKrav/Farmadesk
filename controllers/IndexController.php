@@ -9,13 +9,19 @@ class IndexController{
     public function mostrarActivos(){
         ob_start(); 
         $serviciosActivos = Servicio::mostrarActivos();
+        if(!$serviciosActivos){
+            $serviciosActivos=[];
+        }
         include_once("./views/secciones/servicios.php");
-        return ob_get_clean(); // Capturar y limpiar el buffer
+        return ob_get_clean();
     }
 
     public function mostrarEquipo(){
         ob_start(); 
         $miembrosEquipo = Equipo::consultar();
+        if(!$miembrosEquipo){
+            $miembrosEquipo=[];
+        }
         include_once("./views/secciones/equipo.php");
         return ob_get_clean();
     }
@@ -23,6 +29,9 @@ class IndexController{
     public function mostrarProductos(){
         ob_start();
         $productosActivos = Producto::mostrarProductos();
+        if(!$productosActivos){
+            $productosActivos=[];
+        }
         include_once("./views/secciones/productos.php");
         return ob_get_clean();
     }

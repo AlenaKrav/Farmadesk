@@ -23,53 +23,39 @@ class Receta
         $this->observaciones = $observaciones;
     }
 
-    //metodo original
-    // public static function crear($paciente_id, $imagen_receta,$nombre,$fecha,$codigo_nacional,$observaciones){
-    //     $conexion = BD::crearInstancia();
-    //     $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
-    //     VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', :codigo_nacional, :observaciones);");
-        
-    //     $sql->bindParam(":paciente_id",$paciente_id);
-    //     $sql->bindParam(":imagen_receta",$imagen_receta);
-    //     $sql->bindParam(":nombre",$nombre);
-    //     $sql->bindParam(":fecha",$fecha);
-    //     $sql->bindParam(":codigo_nacional",$codigo_nacional);
-    //     $sql->bindParam(":observaciones",$observaciones);
-    //     $sql->execute();
-    // }
-
-    //metodo crear mas flexible depend si le pasan param como CN u observaciones
-    public static function crear($paciente_id, $imagen_receta, $nombre, $fecha, $codigo_nacional = null, $observaciones = null) {
-        $conexion = BD::crearInstancia();
-        
-        // Si el código nacional y observaciones están disponibles (caso admin)
-        if ($codigo_nacional !== null && $observaciones !== null) {
-            $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
+    public static function crear($paciente_id, $imagen_receta, $nombre, $fecha, $codigo_nacional = null, $observaciones = null)
+    {
+        try {
+            $conexion = BD::crearInstancia();
+            if ($codigo_nacional !== null && $observaciones !== null) {
+                $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
                 VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', :codigo_nacional, :observaciones);");
-            $sql->bindParam(":codigo_nacional", $codigo_nacional);
-            $sql->bindParam(":observaciones", $observaciones);
-        } else {
-            // Solo para paciente: el admin completará los campos luego
-            $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
+                $sql->bindParam(":codigo_nacional", $codigo_nacional);
+                $sql->bindParam(":observaciones", $observaciones);
+            } else {
+                $sql = $conexion->prepare("INSERT INTO `tbl_recetas`(`id_receta`, `paciente_id`, `imagen_receta`, `nombre`, `fecha`, `estado`, `codigo_nacional`, `observaciones`)
                 VALUES (NULL, :paciente_id, :imagen_receta, :nombre, :fecha, 'Enviada', NULL, NULL);");
+            }
+
+            $sql->bindParam(":paciente_id", $paciente_id);
+            $sql->bindParam(":imagen_receta", $imagen_receta);
+            $sql->bindParam(":nombre", $nombre);
+            $sql->bindParam(":fecha", $fecha);
+
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al crear la receta " . $e->getMessage();
+            return false;
         }
-    
-        // Bind de los parámetros comunes
-        $sql->bindParam(":paciente_id", $paciente_id);
-        $sql->bindParam(":imagen_receta", $imagen_receta);
-        $sql->bindParam(":nombre", $nombre);
-        $sql->bindParam(":fecha", $fecha);
-    
-        // Ejecutar la consulta
-        $sql->execute();
     }
-    
+
 
     public static function consultar()
     {
         $listaRecetas = [];
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("SELECT 
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT 
             r.id_receta, 
             r.paciente_id, 
             r.imagen_receta,
@@ -83,98 +69,111 @@ class Receta
             JOIN tbl_pacientes p 
             ON r.paciente_id = p.id_paciente;");
 
-        $sql->execute();
+            $sql->execute();
 
-        foreach ($sql->fetchAll() as $receta) {
-            //por cada fila recorrida, se usa el constructor para crear un objeto con los datos de esa fila
-            //agregamos ese objeto resultante, al arraya
-            $nuevaReceta = new Receta(
-                $receta['id_receta'],
-                $receta['paciente_id'],
-                $receta['imagen_receta'],
-                $receta['nombre_receta'],
-                $receta['fecha'],
-                $receta['estado'],
-                $receta['codigo_nacional'],
-                $receta['observaciones'],
-            );
-            $nuevaReceta->nombre_completo_paciente = $receta['nombre_completo_paciente'];
-            $listaRecetas[] = $nuevaReceta;
+            foreach ($sql->fetchAll() as $receta) {
+                $nuevaReceta = new Receta(
+                    $receta['id_receta'],
+                    $receta['paciente_id'],
+                    $receta['imagen_receta'],
+                    $receta['nombre_receta'],
+                    $receta['fecha'],
+                    $receta['estado'],
+                    $receta['codigo_nacional'],
+                    $receta['observaciones'],
+                );
+                $nuevaReceta->nombre_completo_paciente = $receta['nombre_completo_paciente'];
+                $listaRecetas[] = $nuevaReceta;
+            }
+            return $listaRecetas;
+        } catch (PDOException $e) {
+            echo "Error al mostrar las recetas " . $e->getMessage();
+            return false;
         }
-        return $listaRecetas;
     }
 
 
     public static function buscar($id)
     {
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("SELECT * FROM tbl_recetas WHERE id_receta=:id_receta");
-        $sql->bindParam(":id_receta", $id);
-        $sql->execute();
-        $receta = $sql->fetch();
-        return new Receta(
-            $receta['id_receta'],
-            $receta['paciente_id'],
-            $receta['imagen_receta'],
-            $receta['nombre'],
-            $receta['fecha'],
-            $receta['estado'],
-            $receta['codigo_nacional'],
-            $receta['observaciones']
-        );
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT * FROM tbl_recetas WHERE id_receta=:id_receta");
+            $sql->bindParam(":id_receta", $id);
+            $sql->execute();
+            $receta = $sql->fetch();
+            return new Receta(
+                $receta['id_receta'],
+                $receta['paciente_id'],
+                $receta['imagen_receta'],
+                $receta['nombre'],
+                $receta['fecha'],
+                $receta['estado'],
+                $receta['codigo_nacional'],
+                $receta['observaciones']
+            );
+        } catch (PDOException $e) {
+            echo "Error al buscar la receta con ID $id " . $e->getMessage();
+            return false;
+        }
     }
 
     public static function obtenerImagen($id_receta)
     {
-        $conexion = BD::crearInstancia();
-        //buscamos la imagen del registro con ese ID
-        $sql = $conexion->prepare("SELECT imagen_receta FROM tbl_recetas WHERE id_receta=:id_receta");
-        $sql->bindParam(":id_receta", $id_receta);
-        $sql->execute();
-        $imagen = $sql->fetch();
-        return $imagen['imagen_receta'] ?? null;
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT imagen_receta FROM tbl_recetas WHERE id_receta=:id_receta");
+            $sql->bindParam(":id_receta", $id_receta);
+            $sql->execute();
+            $imagen = $sql->fetch();
+            return $imagen['imagen_receta'] ?? null;
+        } catch (PDOException $e) {
+            echo "Error al obtener la imagen " . $e->getMessage();
+            return false;
         }
-
-        //funciona correctamente
+    }
 
     public static function borraImagenReceta($imagen)
     {
-        $ruta_imagen = "assets/img/recetas/" . $imagen;
-        if (file_exists($ruta_imagen)) {
-            unlink($ruta_imagen);
+        try {
+            $ruta_imagen = "assets/img/recetas/" . $imagen;
+            if (file_exists($ruta_imagen)) {
+                unlink($ruta_imagen);
+            }
+            return true;
+        } catch (PDOException $e) {
+            echo "Error al borrar la imagen " . $e->getMessage();
+            return false;
         }
     }
 
     public static function actualizarImagen($id_receta, $imagen_receta)
     {
-        $conexion = BD::crearInstancia();
+        try {
+            $conexion = BD::crearInstancia();
             $sql = $conexion->prepare("UPDATE tbl_recetas SET imagen_receta = :imagen_receta WHERE id_receta = :id_receta");
             $sql->bindParam(":imagen_receta", $imagen_receta);
             $sql->bindParam(":id_receta", $id_receta);
             $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al actualizar la imagen " . $e->getMessage();
+            return false;
         }
-    
+    }
+
 
 
     public static function editar($id_receta, $paciente_id, $imagen_receta, $nombre, $fecha, $estado, $codigo_nacional, $observaciones)
     {
-        $conexion = BD::crearInstancia();
-        //obtenemos la imagen de la receta a actualizar
-        if ($imagen_receta != "") {
-            //obtenemos la img actual de la receta
-            $imagen_actual = self::obtenerImagen($id_receta);
-            //si existe uma img 
-            // if ($imagen_actual) {
-            //     self::borraImagenReceta($imagen_actual);
-            // }
-
-            //cambio
-            if ($imagen_actual && $imagen_receta != $imagen_actual) {
-                self::borraImagenReceta($imagen_actual);
+        try {
+            $conexion = BD::crearInstancia();
+            if ($imagen_receta != "") {
+                $imagen_actual = self::obtenerImagen($id_receta);
+                if ($imagen_actual && $imagen_receta != $imagen_actual) {
+                    self::borraImagenReceta($imagen_actual);
+                }
             }
-        }
 
-        $sql = $conexion->prepare("UPDATE tbl_recetas 
+            $sql = $conexion->prepare("UPDATE tbl_recetas 
         SET paciente_id = :paciente_id, 
             imagen_receta = :imagen_receta, 
             nombre = :nombre, 
@@ -184,63 +183,70 @@ class Receta
             observaciones = :observaciones 
         WHERE id_receta = :id_receta");
 
-        $sql->bindParam(":paciente_id", $paciente_id);
-        $sql->bindParam(":imagen_receta", $imagen_receta);
-        $sql->bindParam(":nombre", $nombre);
-        $sql->bindParam(":fecha", $fecha);
-        $sql->bindParam(":estado", $estado);
-        $sql->bindParam(":codigo_nacional", $codigo_nacional);
-        $sql->bindParam(":observaciones", $observaciones);
-        $sql->bindParam(":id_receta", $id_receta);
+            $sql->bindParam(":paciente_id", $paciente_id);
+            $sql->bindParam(":imagen_receta", $imagen_receta);
+            $sql->bindParam(":nombre", $nombre);
+            $sql->bindParam(":fecha", $fecha);
+            $sql->bindParam(":estado", $estado);
+            $sql->bindParam(":codigo_nacional", $codigo_nacional);
+            $sql->bindParam(":observaciones", $observaciones);
+            $sql->bindParam(":id_receta", $id_receta);
 
-        // Ejecutamos la consulta
-        $sql->execute();
+            $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al editar la receta con ID $id_receta " . $e->getMessage();
+            return false;
+        }
     }
 
-    
-    //funciona correctamente
+
     public static function borrar($id_receta)
     {
-        $conexion = BD::crearInstancia();
-        //obtenemos la imagen del registro a borrar
-        $imagen = self::obtenerImagen($id_receta);
+        try {
+            $conexion = BD::crearInstancia();
+            $imagen = self::obtenerImagen($id_receta);
 
-        if ($imagen) {
-            self::borraImagenReceta($imagen);
+            if ($imagen) {
+                self::borraImagenReceta($imagen);
+            }
+
+            $sql = $conexion->prepare("DELETE FROM tbl_recetas WHERE id_receta = :id_receta");
+            $sql->bindParam(":id_receta", $id_receta);
+            return $sql->execute();
+        } catch (PDOException $e) {
+            echo "Error al borrar la receta con ID $id_receta " . $e->getMessage();
+            return false;
         }
-
-        $sql = $conexion->prepare("DELETE FROM tbl_recetas WHERE id_receta = :id_receta");
-        $sql->bindParam(":id_receta", $id_receta);
-        return $sql->execute();
     }
 
 
-
-
-    public static function buscarRecetaPaciente($paciente_id){
+    public static function buscarRecetaPaciente($paciente_id)
+    {
         $listaRecetasPaciente = [];
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("SELECT * FROM `tbl_recetas` WHERE paciente_id=:paciente_id");
-        $sql->bindParam(":paciente_id", $paciente_id);
-        $sql->execute();
+        try {
+            $conexion = BD::crearInstancia();
+            $sql = $conexion->prepare("SELECT * FROM `tbl_recetas` WHERE paciente_id=:paciente_id");
+            $sql->bindParam(":paciente_id", $paciente_id);
+            $sql->execute();
 
-        foreach ($sql->fetchAll() as $recetaPaciente) {
-            //por cada fila recorrida, se usa el constructor para crear un objeto con los datos de esa fila
-            //agregamos ese objeto resultante, al arraya
-            $nuevaReceta = new Receta(
-                $recetaPaciente['id_receta'],
-                $recetaPaciente['paciente_id'],
-                $recetaPaciente['imagen_receta'],
-                $recetaPaciente['nombre'],
-                $recetaPaciente['fecha'],
-                $recetaPaciente['estado'],
-                $recetaPaciente['codigo_nacional'],
-                $recetaPaciente['observaciones'],
-            );
-            $listaRecetasPaciente[] = $nuevaReceta;
+            foreach ($sql->fetchAll() as $recetaPaciente) {
+                $nuevaReceta = new Receta(
+                    $recetaPaciente['id_receta'],
+                    $recetaPaciente['paciente_id'],
+                    $recetaPaciente['imagen_receta'],
+                    $recetaPaciente['nombre'],
+                    $recetaPaciente['fecha'],
+                    $recetaPaciente['estado'],
+                    $recetaPaciente['codigo_nacional'],
+                    $recetaPaciente['observaciones'],
+                );
+                $listaRecetasPaciente[] = $nuevaReceta;
+            }
+            return $listaRecetasPaciente;
+        } catch (PDOException $e) {
+            echo "Error al buscar la receta del paciente con ID $paciente_id " . $e->getMessage();
+            return null;
         }
-        return $listaRecetasPaciente;
     }
-
-    }
-
+}
+?>

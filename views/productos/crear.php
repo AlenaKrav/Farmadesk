@@ -1,11 +1,8 @@
 <?php
-$titulo = "Crear un producto";
+$titulo = "Añadir un nuevo producto";
 $pagina_activa = "productos";
 include("./templates/header.php");
-print_r($_POST);
-print_r($_FILES);
 ?>
-
 <div class="card">
     <div class="card-header">Añadir un nuevo producto</div>
     <div class="card-body">
@@ -39,9 +36,6 @@ print_r($_FILES);
     </div>
     <div class="card-footer text-muted"></div>
 </div>
-
-
-
 <?php
 include("./templates/footer.php");
 ?>

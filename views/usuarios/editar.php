@@ -2,11 +2,9 @@
 $titulo = "Editar un usuario";
 $pagina_activa = "usuarios";
 include("./templates/header.php");
-// var_dump($usuario);
-// print_r($_POST);
 ?>
 <div class="card">
-    <div class="card-header">Editar la información de los usuarios</div>
+    <div class="card-header">Editar un usuario</div>
     <div class="card-body">
         <form action="" enctype="multipart/form-data" method="post">
             <div class="mb-3">
@@ -14,58 +12,73 @@ include("./templates/header.php");
                 <input readonly value="<?php echo $usuario->id ?>" type="text" class="form-control" name="id" id="id" aria-describedby="helpId" placeholder="Id" />
             </div>
             <div class="mb-3">
-                <label for="id" class="form-label">Nombre:</label>
-                <input value="<?php echo $usuario->nombre ?>" type="text" class="form-control" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : $usuario->nombre; ?>" class="form-control <?php echo isset($errores['nombre']) ? 'is-invalid' : ''; ?>" type="text" name="nombre" id="nombre" aria-describedby="helpId" placeholder="Nombre" />
+                <?php if (isset($errores['nombre'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['nombre']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
-                <label for="id" class="form-label">Apellidos:</label>
-                <input value="<?php echo $usuario->apellidos ?>" type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos" />
+                <label for="apellidos" class="form-label">Apellidos:</label>
+                <input value="<?php echo isset($_POST['apellidos']) ? $_POST['apellidos'] : $usuario->apellidos; ?>" type="text" class="form-control <?php echo isset($errores['apellidos']) ? 'is-invalid' : ''; ?>" name="apellidos" id="apellidos" aria-describedby="helpId" placeholder="Apellidos" />
+                <?php if (isset($errores['apellidos'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['apellidos']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="usuario" class="form-label">Usuario:</label>
-                <input value="<?php echo $usuario->usuario ?>" type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="Usuario" />
+                <input value="<?php echo isset($_POST['usuario']) ? $_POST['usuario'] : $usuario->usuario; ?>" type="text" class="form-control <?php echo isset($errores['usuario']) ? 'is-invalid' : ''; ?>" name="usuario" id="usuario" aria-describedby="helpId" placeholder="Usuario" />
+                <?php if (isset($errores['usuario'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['usuario']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña:</label>
-                <input value="<?php echo $usuario->password ?>" type="password" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="Password" />
+                <input value="<?php echo isset($_POST['password']) ? $_POST['password'] : $usuario->password; ?>" type="password" class="form-control <?php echo isset($errores['password']) ? 'is-invalid' : ''; ?>" name="password" id="password" aria-describedby="helpId" placeholder="Password" />
+                <?php if (isset($errores['password'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['password']; ?></div>
+                <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo:</label>
-                <input value="<?php echo $usuario->correo ?>" type="text" class="form-control" name="correo" id="correo" aria-describedby="helpId" placeholder="Correo" />
+                <input value="<?php echo isset($_POST['correo']) ? $_POST['correo'] : $usuario->correo; ?>" type="text" class="form-control <?php echo isset($errores['correo']) ? 'is-invalid' : ''; ?>" name="correo" id="correo" aria-describedby="helpId" placeholder="Correo" />
+                <?php if (isset($errores['correo'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['correo']; ?></div>
+                <?php endif; ?>
             </div>
 
             <div class="mb-3">
                 <label for="role_id" class="form-label">Tipo de usuario:</label>
                 <select name="role_id" id="role_id" class="form-control" onchange="mostrarCampoPaciente()">
-                    <option value="1" <?php if ($usuario->role_id == 1) echo 'selected="selected"'; ?>>Admin</option>
-                    <option value="2" <?php if ($usuario->role_id == 2) echo 'selected="selected"'; ?>>Auxiliar</option>
-                    <option value="3" <?php if ($usuario->role_id == 3) echo 'selected="selected"'; ?>>Paciente</option>
+                    <option value="1" <?php echo (isset($_POST['role_id']) && $_POST['role_id'] == 1) || $usuario->role_id == 1 ? 'selected="selected"' : ''; ?>>Admin</option>
+                    <option value="3" <?php echo (isset($_POST['role_id']) && $_POST['role_id'] == 3) || $usuario->role_id == 3 ? 'selected="selected"' : ''; ?>>Paciente</option>
                 </select>
             </div>
-                    <!-- Campo de paciente_id (oculto inicialmente) -->
-        <div class="mb-3" id="campo_paciente" style="display: none;">
+            <div class="mb-3" id="campo_paciente" style="display: none;">
                 <label for="id_paciente" class="form-label">ID Paciente:</label>
-                <input type="text" class="form-control" id="id_paciente" name="id_paciente" aria-describedby="helpId" placeholder="Id de Paciente" />
+                <input type="text" value="<?php echo isset($_POST['id_paciente']) ? $_POST['id_paciente'] : $usuario->id_paciente; ?>" class="form-control <?php echo isset($errores['id_paciente']) ? 'is-invalid' : ''; ?>" id="paciente_id" name="id_paciente" aria-describedby="helpId" placeholder="Id de Paciente" />
+                <?php if (isset($errores['id_paciente'])): ?>
+                    <div class="invalid-feedback"><?php echo $errores['id_paciente']; ?></div>
+                <?php endif; ?>
+                <div id="sugerencias"></div>
             </div>
             <button type="submit" name="actualizar" class="btn btn-success">Actualizar</button>
-            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base ?>usuarios" role="button">Cancelar</a>
+            <a name="" id="" class="btn btn-primary" href="<?php echo $url_base ?>admin/usuarios" role="button">Cancelar</a>
         </form>
     </div>
     <div class="card-footer text-muted"></div>
 </div>
 <script>
-    // Función para mostrar/ocultar el campo de paciente_id
     function mostrarCampoPaciente() {
         var rolSeleccionado = document.getElementById('role_id').value;
-        console.log(rolSeleccionado);
         var campoPaciente = document.getElementById('campo_paciente');
-
         if (rolSeleccionado === '3') {
-            campoPaciente.style.display = 'block'; // Mostrar campo
+            campoPaciente.style.display = 'block';
         } else {
-            campoPaciente.style.display = 'none'; // Ocultar campo
+            campoPaciente.style.display = 'none';
         }
     }
+    window.onload = mostrarCampoPaciente;
 </script>
 <?php
 include("./templates/footer.php");
